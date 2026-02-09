@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/ValorCartao"
+        android:layout_width="280dp"
+        android:layout_height="60dp"
+        android:hint="Valor"
+        app:layout_constraintBottom_toTopOf="@+id/CreditBank"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.924" />
+
+    <CalendarView
+        android:id="@+id/calendarCreditCard"
+        android:layout_width="285dp"
+        android:layout_height="309dp"
+        android:layout_marginBottom="36dp"
+        android:background="@color/white"
+        android:theme="@style/Theme.AppCompat.Light"
+        app:layout_constraintBottom_toTopOf="@+id/addCardButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/categoriaIdDes"
+        app:layout_constraintVertical_bias="0.452" />
+
+    <TextView
+        android:id="@+id/valorCalendarCard"
+        android:layout_width="227dp"
+        android:layout_height="31dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="108dp"
+        android:text="Data"
+        app:layout_constraintBottom_toTopOf="@+id/addCardButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/fabCalendarCard"
+        app:layout_constraintTop_toBottomOf="@+id/categoriaIdCard"
+        app:layout_constraintVertical_bias="0.278" />
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/CreditBank"
+        android:layout_width="280dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:hint="Banco do cartão"
+        app:layout_constraintBottom_toTopOf="@+id/spinner"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/addValorField" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabCalendarCard"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="128dp"
+        android:clickable="true"
+        app:layout_constraintBottom_toTopOf="@+id/addCardButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.073"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/idDescricaoDes"
+        app:layout_constraintVertical_bias="0.198"
+        app:srcCompat="@drawable/ic_launcher_background" />
+
+    <Button
+        android:id="@+id/addCardButton"
+        android:layout_width="126dp"
+        android:layout_height="65dp"
+        android:layout_marginBottom="4dp"
+        android:text="Adicionar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.442"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/idDescricaoDes"
+        app:layout_constraintVertical_bias="0.923" />
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/categoriaIdCard"
+        android:layout_width="280dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="332dp"
+        android:hint="Categoria"
+        app:layout_constraintBottom_toTopOf="@+id/addCardButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.167" />
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/idDescricaoCard"
+        android:layout_width="280dp"
+        android:layout_height="60dp"
+        android:layout_marginBottom="10dp"
+        android:hint="Descrição"
+        app:layout_constraintBottom_toTopOf="@+id/categoriaIdCard"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.503"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Spinner
+        android:id="@+id/spinner"
+        android:layout_width="280dp"
+        android:layout_height="36dp"
+        android:layout_marginBottom="10dp"
+        app:layout_constraintBottom_toTopOf="@+id/idDescricaoCard"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

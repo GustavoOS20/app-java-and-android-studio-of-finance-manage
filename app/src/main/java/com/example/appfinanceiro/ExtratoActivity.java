@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.view.MenuItem;
 
 import com.example.appfinanceiro.databinding.ActivityExtratoBinding;
 import com.example.appfinanceiro.utilitiesClass.ViewUtilities;
@@ -19,6 +20,21 @@ public class ExtratoActivity extends AddBalanceActivity{
         inicializarLayout();
         ViewUtilities.setMargins(binding.getRoot());
         menuNavegation();
+        actionBar();
+    }
+
+    private void actionBar(){
+        setSupportActionBar(binding.toolbar6);
+        ViewUtilities.actionBar(this, true);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            finish();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     private void inicializarLayout(){

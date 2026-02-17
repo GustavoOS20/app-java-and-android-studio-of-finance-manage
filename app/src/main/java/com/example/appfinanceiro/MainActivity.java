@@ -9,8 +9,10 @@ import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.view.Menu;
 
 import androidx.activity.EdgeToEdge;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.appfinanceiro.databinding.ActivityMainBinding;
@@ -19,7 +21,6 @@ import com.example.appfinanceiro.utilitiesClass.ViewUtilities;
 
 public class MainActivity extends AppCompatActivity{
     private ActivityMainBinding binding;
-    private ActivityAddBalanceBinding bindingAdd;
     private final ColorStateList buttonColorDisabled = ColorStateList.valueOf(Color.parseColor("#571895D8"));
     private final ColorStateList buttonColorEnabled = ColorStateList.valueOf(Color.parseColor("#925FBC"));
 
@@ -32,12 +33,25 @@ public class MainActivity extends AppCompatActivity{
         ViewUtilities.setMargins(binding.getRoot());
         menuNavegation();
         fabAddAndRemove();
+        actionBar();
     }
 
     private void inicializarLayout(){
         EdgeToEdge.enable(this);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+    }
+
+    private void actionBar(){
+        setSupportActionBar(binding.toolbar);
+        ViewUtilities.actionBar(this, false);
+        onCreateOptionsMenu(binding.toolbar.getMenu());
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_item, menu);
+        return true;
     }
 
     private void fabAddAndRemove() {
@@ -49,18 +63,25 @@ public class MainActivity extends AppCompatActivity{
             Intent intent = new Intent(MainActivity.this, AddDespesasActivity.class);
             startActivity(intent);
         });
+        binding.addCartao.setOnClickListener(view -> {
+            Intent intent = new Intent(MainActivity.this, AddCreditCardActivity.class);
+            startActivity(intent);
+        });
     }
 
     private void alterValues(){
         binding.main.setOnClickListener(view -> {
             binding.AddSaldo.setVisibility(GONE);
             binding.addDespesas.setVisibility(GONE);
+            binding.addCartao.setVisibility(GONE);
         });
         binding.AddSaldo.setVisibility(GONE);
         binding.addDespesas.setVisibility(GONE);
+        binding.addCartao.setVisibility(GONE);
         binding.AddValues.setOnClickListener(view -> {
             binding.AddSaldo.setVisibility(VISIBLE);
             binding.addDespesas.setVisibility(VISIBLE);
+            binding.addCartao.setVisibility(VISIBLE);
         });
     }
 

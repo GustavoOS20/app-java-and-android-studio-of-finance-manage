@@ -5,6 +5,20 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar3"
+        android:layout_width="411dp"
+        android:layout_height="71dp"
+        android:background="?attr/colorOnPrimaryFixedVariant"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:layout_constraintBottom_toTopOf="@+id/calendarView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
     <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/addValorField"
         android:layout_width="280dp"
@@ -16,13 +30,13 @@
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.105" />
+        app:layout_constraintVertical_bias="0.612" />
 
     <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/contaOrigemId"
         android:layout_width="280dp"
         android:layout_height="60dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="144dp"
         android:hint="Conta de Origem"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
@@ -44,7 +58,7 @@
         android:id="@+id/idDescricaoDes"
         android:layout_width="280dp"
         android:layout_height="60dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="8dp"
         android:hint="Descrição"
         app:layout_constraintBottom_toTopOf="@+id/ContaDestinoId"
         app:layout_constraintEnd_toEndOf="parent"
@@ -63,7 +77,7 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/idDescricaoDes"
-        app:layout_constraintVertical_bias="0.923" />
+        app:layout_constraintVertical_bias="0.839" />
 
     <CalendarView
         android:id="@+id/calendarDespesas"
@@ -84,10 +98,10 @@
         android:clickable="true"
         app:layout_constraintBottom_toTopOf="@+id/addSaldoButton"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.118"
+        app:layout_constraintHorizontal_bias="0.081"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/idDescricaoDes"
-        app:layout_constraintVertical_bias="0.198"
+        app:layout_constraintVertical_bias="0.578"
         app:srcCompat="@drawable/ic_launcher_background" />
 
     <TextView
@@ -97,8 +111,8 @@
         android:text="Data"
         app:layout_constraintBottom_toTopOf="@+id/addSaldoButton"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.232"
+        app:layout_constraintHorizontal_bias="0.212"
         app:layout_constraintStart_toEndOf="@+id/fabCalendar"
         app:layout_constraintTop_toBottomOf="@+id/idDescricaoDes"
-        app:layout_constraintVertical_bias="0.24" />
+        app:layout_constraintVertical_bias="0.592" />
 </androidx.constraintlayout.widget.ConstraintLayout>

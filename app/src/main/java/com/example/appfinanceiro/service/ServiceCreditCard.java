@@ -2,7 +2,9 @@ package com.example.appfinanceiro.service;
 
 import com.example.appfinanceiro.interfaces.AddCreditCardInterface;
 import com.example.appfinanceiro.model.ModelCreditCard;
+import com.example.appfinanceiro.model.Parcela;
 
+import java.util.List;
 import java.util.Map;
 
 public class ServiceCreditCard {
@@ -22,5 +24,13 @@ public class ServiceCreditCard {
 
     public Map<String, ModelCreditCard> getCreditCards() {
         return addCreditCardInterface.getCreditCards();
+    }
+
+    public void criarParcela(){
+        addCreditCardInterface.criarParcela();
+    }
+
+    public List<Parcela> getListaDeParcelas(){
+        return addCreditCardInterface.getListaDeParcelas();
     }
 }

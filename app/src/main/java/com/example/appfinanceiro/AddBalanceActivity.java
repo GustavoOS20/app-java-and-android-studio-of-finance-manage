@@ -5,6 +5,8 @@ import static android.view.View.VISIBLE;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.Toast;
 
 import androidx.activity.OnBackPressedCallback;
@@ -35,11 +37,26 @@ public class AddBalanceActivity extends AppCompatActivity {
         confirmAdd();
         calendarOpacity();
         valueCalendar();
+        actionBar();
+    }
+
+    private void actionBar(){
+        setSupportActionBar(binding.toolbar2);
+        ViewUtilities.actionBar(this, true);
     }
 
     private void inicializarLayout(){
         binding = ActivityAddBalanceBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            finish();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     private void backButton() {
@@ -60,7 +77,7 @@ public class AddBalanceActivity extends AppCompatActivity {
 
     private void confirmAdd() {
         binding.AddSaldoButton.setOnClickListener(view -> {
-            if (VerificationsAdd.verifyinput(binding)) {
+            if (VerificationsAdd.verifyinput(binding, data)) {
                 String saldo = Objects.requireNonNull(binding.AddSaldoField.getText()).toString();
                 String descricao = Objects.requireNonNull(binding.IdDescricao.getText()).toString();
                 String contaDestino = Objects.requireNonNull(binding.ContaDestinoId.getText()).toString();

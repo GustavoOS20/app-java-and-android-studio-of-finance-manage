@@ -2,16 +2,19 @@ package com.example.appfinanceiro.data;
 
 import com.example.appfinanceiro.interfaces.AddCreditCardInterface;
 import com.example.appfinanceiro.model.ModelCreditCard;
+import com.example.appfinanceiro.model.Parcela;
 import com.example.appfinanceiro.service.ServiceCreditCard;
 import com.example.appfinanceiro.utilitiesClass.ViewUtilities;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
-import java.util.UUID;
 
 public class AddCreditCard implements AddCreditCardInterface {
+    private static final List<Parcela > listaDeParcelas = new ArrayList<>();
     private static final Map<String, ModelCreditCard> creditCards = new HashMap<>();
 
     public void addCreditCard(String id, ModelCreditCard creditCardData){
@@ -50,6 +53,17 @@ public class AddCreditCard implements AddCreditCardInterface {
             }
             mes ++;
         }
+    }
+
+    @Override
+    public void criarParcela(){
+        for (int i = 1; i <= 12; i++) {
+            listaDeParcelas.add(new Parcela(i));
+        }
+    }
+
+    public List<Parcela> getListaDeParcelas(){
+        return listaDeParcelas;
     }
 
 }

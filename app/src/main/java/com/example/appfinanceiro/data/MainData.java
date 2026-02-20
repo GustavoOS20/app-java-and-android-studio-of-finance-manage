@@ -56,30 +56,29 @@ public class MainData {
 
     public void despesas() {
         dataPresente();
-        for (ModelExpense expense : serviceDespesas.getDespesas().values()){
-            if (expense.getMes() == mes && expense.getAno() == ano){
-                despesas += Integer.parseInt(expense.getValor());
-            }
-        }
+        int despesasFor = serviceDespesas.getDespesas().values().stream()
+                .filter(expense -> expense.getMes() == mes && expense.getAno() == ano).
+                mapToInt(expense -> Integer.parseInt(expense.getValor())).
+                sum();
+        despesas += despesasFor;
    }
 
    public void balance(){
        dataPresente();
-       for (ModelBalance balance : serviceBalance.getBalances().values()){
-           if (balance.getMes() == mes && balance.getAno() == ano){
-               receitas += Integer.parseInt(balance.getSaldo());
-           }
-       }
+       int balance = serviceBalance.getBalances().values().stream()
+               .filter(balance1 -> balance1.getMes() == mes && balance1.getAno() == ano)
+               .mapToInt(balance1 -> Integer.parseInt(balance1.getSaldo())).
+               sum();
+       receitas += balance;
     }
 
     public void creditCard(){
         dataPresente();
-        for (ModelCreditCard creditCard : serviceCreditCard.getCreditCards().values()){
-            if (creditCard.getMes() == mes && creditCard.getAno() == ano){
-                double saldo = creditCard.getValor().doubleValue();
-                saldoCartao += saldo;
-            }
-        }
+        double cartao = serviceCreditCard.getCreditCards().values().stream()
+                .filter(creditCard -> creditCard.getMes() == mes && creditCard.getAno() == ano).
+                mapToDouble(creditCard -> creditCard.getValor().doubleValue()).
+                sum();
+        saldoCartao += cartao;
     }
 
     private void dataPresente(){
@@ -105,32 +104,18 @@ public class MainData {
         receitas = 0;
         saldoCartao = 0;
 
-        for (ModelExpense expense : serviceDespesas.getDespesas().values()) {
-            if (expense.getMes() == mesFor && expense.getAno() == anoFor) {
-                despesas += Integer.parseInt(expense.getValor());
-                String despesasFormat = "Despesas: " + despesas;
-                binding.DespesasId.setText(despesasFormat);
+        int despesas = serviceDespesas.getDespesas().values().stream().filter(expense -> expense.getMes() == mesFor && expense.getAno() == anoFor).mapToInt(expense -> Integer.parseInt(expense.getValor())).sum();
+        String despesasFormat = "Despesas: " + despesas;
+        binding.DespesasId.setText(despesasFormat);
 
-                }
-            }
-        for (ModelBalance balance : serviceBalance.getBalances().values()) {
-            if (balance.getMes() == mesFor && balance.getAno() == anoFor) {
-                receitas += Integer.parseInt(balance.getSaldo());
-                String receitasFormat = "Receitas: " + receitas;
-                binding.receitasId.setText(receitasFormat);
+        int balance = serviceBalance.getBalances().values().stream().filter(balance1 -> balance1.getMes() == mesFor && balance1.getAno() == anoFor).mapToInt(balance1 -> Integer.parseInt(balance1.getSaldo())).sum();
+        String balanceFormat = "Saldo: " + balance;
+        binding.saldoId.setText(balanceFormat);
 
-            }
+        double cartao = serviceCreditCard.getCreditCards().values().stream().filter(creditCard -> creditCard.getMes() == mesFor && creditCard.getAno() == anoFor).mapToDouble(creditCard -> creditCard.getValor().doubleValue()).sum();
+        String cartaoFormat = "Saldo Cartão: " + cartao;
+        binding.saldoCartO.setText(cartaoFormat);
 
-        }
-        for (ModelCreditCard creditCard : serviceCreditCard.getCreditCards().values()) {
-            if (creditCard.getMes() == mesFor && creditCard.getAno() == anoFor) {
-                double saldo = creditCard.getValor().doubleValue();
-                saldoCartao += saldo;
-                String saldoCartaoFormat = "Saldo Cartão: " + saldoCartao;
-                binding.saldoCartO.setText(saldoCartaoFormat);
-                System.out.println("Ano: " + anoFor + " Mes: " + mesFor);
-            }
-        }
         setSaldo();
     }
 

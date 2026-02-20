@@ -140,8 +140,7 @@ public class MainActivity extends AppCompatActivity{
                     binding.homeButton.setBackgroundTintList(buttonColorDisabled);
                     binding.ExtratoButton.setBackgroundTintList(buttonColorEnabled);
                     Intent intent = new Intent(MainActivity.this, ExtratoActivity.class);
-                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-                    startActivity(intent);
+                    cadastroLauncher.launch(intent);
                 }
         );
     }
@@ -153,10 +152,10 @@ public class MainActivity extends AppCompatActivity{
         binding.mesId.setSelection(mes);
         int ano = calendar.get(Calendar.YEAR);
 
-        for(Integer year : Year.getAnos()) {
-            if (year == ano) {
-                binding.anoId.setSelection(Year.getAnos().indexOf(year));
-            }
+        int posicao = Year.getAnos().indexOf(ano);
+
+        if (posicao != -1) {
+            binding.anoId.setSelection(posicao);
         }
 
         resgatarValueSpinner(binding.mesId);
@@ -168,7 +167,6 @@ public class MainActivity extends AppCompatActivity{
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 mainData.changeDate(binding, binding.mesId.getSelectedItem(), binding.anoId.getSelectedItem());
-                System.out.println(binding.mesId.getSelectedItem() .toString()+ " " + binding.anoId.getSelectedItem().toString());
             }
 
             @Override

@@ -38,10 +38,11 @@ public class AddCreditCard implements AddCreditCardInterface {
         for (int i = 0; i < addCreditCard.getParcelas(); i++) {
             AddCreditCardInterface creditCardInterface = new AddCreditCard();
             ServiceCreditCard serviceCreditCard = new ServiceCreditCard(creditCardInterface);
+            String descricao = addCreditCard.getDescricao() + "Parcela: "+ addCreditCard.getParcelas();
             ModelCreditCard creditCardData = new ModelCreditCard(valorDividido,
                     addCreditCard.getBankcCard(),
-                    addCreditCard.getParcelas(),
-                    addCreditCard.getDescricao(),
+                    1,
+                    descricao,
                     addCreditCard.getCategoria(),
                     addCreditCard.getDia(),
                     mes,

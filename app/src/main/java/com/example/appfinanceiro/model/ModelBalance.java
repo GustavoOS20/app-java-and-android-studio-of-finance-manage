@@ -7,14 +7,19 @@ public class ModelBalance {
     private final String status;
     private final String categoria;
     private final String data;
+    private final int mes;
+    private final int ano;
 
-    public ModelBalance(String saldo, String descricao, String contaDestino, String status, String categoria, String data) {
+
+    public ModelBalance(String saldo, String descricao, String contaDestino, String status, String categoria, String data, int mes, int ano) {
         this.saldo = saldo;
         this.descricao = descricao;
         this.contaDestino = contaDestino;
         this.status = status;
         this.categoria = categoria;
         this.data = data;
+        this.mes = mes;
+        this.ano = ano;
     }
 
     public String getDescricao() {
@@ -39,5 +44,13 @@ public class ModelBalance {
 
     public String getData() {
         return data;
+    }
+
+    public int getMes() {
+        return mes;
+    }
+
+    public int getAno() {
+        return ano;
     }
 }

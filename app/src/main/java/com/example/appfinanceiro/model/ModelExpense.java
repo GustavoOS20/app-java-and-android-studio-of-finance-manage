@@ -6,13 +6,25 @@ public class ModelExpense {
     private final String data;
     private final String contaOrigem;
     private final String categoria;
+    private final int mes;
+    private final int ano;
 
-    public ModelExpense(String valor, String descricao, String data, String contaOrigem, String categoria) {
+    public ModelExpense(String valor, String descricao, String data, String contaOrigem, String categoria, int mes, int ano) {
         this.valor = valor;
         this.descricao = descricao;
         this.data = data;
         this.contaOrigem = contaOrigem;
         this.categoria = categoria;
+        this.mes = mes;
+        this.ano = ano;
+    }
+
+    public int getMes() {
+        return mes;
+    }
+
+    public int getAno() {
+        return ano;
     }
 
     public String getValor() {

@@ -7,6 +7,17 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    <Spinner
+        android:id="@+id/anoId"
+        android:layout_width="115dp"
+        android:layout_height="31dp"
+        app:layout_constraintBottom_toTopOf="@+id/saldoId"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.295"
+        app:layout_constraintStart_toEndOf="@+id/mesId"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar"
+        app:layout_constraintVertical_bias="0.507" />
+
     <Button
         android:id="@+id/addDespesas"
         android:layout_width="199dp"
@@ -86,16 +97,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
-    <CalendarView
-        android:id="@+id/calendarView"
-        android:layout_width="217dp"
-        android:layout_height="57dp"
-        app:layout_constraintBottom_toTopOf="@+id/saldoId"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.789" />
-
     <TextView
         android:id="@+id/DespesasId"
         android:layout_width="287dp"
@@ -112,16 +113,16 @@
         tools:ignore="HardcodedText" />
 
     <TextView
-        android:id="@+id/saldoPrevistoId"
+        android:id="@+id/saldoCartão"
         android:layout_width="287dp"
         android:layout_height="103dp"
         android:layout_margin="10dp"
-        android:text ="Saldo Previsto"
+        android:gravity="center"
+        android:text="Saldo Cartão"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:gravity="center"
         app:layout_constraintTop_toBottomOf="@+id/DespesasId"
         app:layout_constraintVertical_bias="0.0"
         tools:ignore="HardcodedText" />
@@ -191,11 +192,19 @@
         android:background="?attr/colorOnPrimaryFixedVariant"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
-        app:layout_constraintBottom_toTopOf="@+id/calendarView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Spinner
+        android:id="@+id/mesId"
+        android:layout_width="148dp"
+        android:layout_height="33dp"
+        android:layout_marginStart="60dp"
+        app:layout_constraintBottom_toTopOf="@+id/saldoId"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar"
+        app:layout_constraintVertical_bias="0.522" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

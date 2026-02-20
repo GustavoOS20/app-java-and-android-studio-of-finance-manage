@@ -3,23 +3,36 @@ package com.example.appfinanceiro;
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
 
-import static androidx.core.content.ContextCompat.startActivity;
-
+import android.app.Activity;
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.Spinner;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
-import androidx.appcompat.app.ActionBar;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.appfinanceiro.adapter.AdapterDataMainMes;
+import com.example.appfinanceiro.adapter.AdapterDataMainYear;
+import com.example.appfinanceiro.data.MainData;
 import com.example.appfinanceiro.databinding.ActivityMainBinding;
-import com.example.appfinanceiro.databinding.ActivityAddBalanceBinding;
+import com.example.appfinanceiro.model.Mes;
+import com.example.appfinanceiro.model.Year;
 import com.example.appfinanceiro.utilitiesClass.ViewUtilities;
 
+import java.util.Calendar;
+import java.util.Locale;
+
 public class MainActivity extends AppCompatActivity{
+    MainData mainData = new MainData();
+    private ActivityResultLauncher<Intent> cadastroLauncher;
     private ActivityMainBinding binding;
     private final ColorStateList buttonColorDisabled = ColorStateList.valueOf(Color.parseColor("#571895D8"));
     private final ColorStateList buttonColorEnabled = ColorStateList.valueOf(Color.parseColor("#925FBC"));
@@ -34,12 +47,42 @@ public class MainActivity extends AppCompatActivity{
         menuNavegation();
         fabAddAndRemove();
         actionBar();
+        defineValues();
+        salvarDados();
+        mudarData();
     }
 
     private void inicializarLayout(){
         EdgeToEdge.enable(this);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+    }
+
+    private void salvarDados(){
+        cadastroLauncher = registerForActivityResult(
+                new ActivityResultContracts.StartActivityForResult(),
+                result -> {
+                    if (result.getResultCode() == Activity.RESULT_OK) {
+                        defineValues();
+                        Toast.makeText(this, "Finança salva!", Toast.LENGTH_SHORT).show();
+                    }
+                });
+    }
+
+    private void defineValues(){
+        mainData.despesas();
+        mainData.balance();
+        mainData.creditCard();
+        mainData.setSaldo();
+        String despesas = "Despesas: " + mainData.getDespesas();
+        String receitas = "Receitas: " + mainData.getReceitas();
+        String saldo = "Saldo: " + mainData.getSaldo();
+        String saldoCartao = "Saldo Cartão: " + mainData.getSaldoCartao();
+        binding.DespesasId.setText(despesas);
+        binding.saldoId.setText(saldo);
+        binding.receitasId.setText(receitas);
+        binding.saldoCartO.setText(saldoCartao);
+
     }
 
     private void actionBar(){
@@ -57,15 +100,15 @@ public class MainActivity extends AppCompatActivity{
     private void fabAddAndRemove() {
         binding.AddSaldo.setOnClickListener(view -> {
             Intent intent = new Intent(MainActivity.this, AddBalanceActivity.class);
-            startActivity(intent);
+            cadastroLauncher.launch(intent);
         });
         binding.addDespesas.setOnClickListener(view -> {
             Intent intent = new Intent(MainActivity.this, AddDespesasActivity.class);
-            startActivity(intent);
+            cadastroLauncher.launch(intent);
         });
         binding.addCartao.setOnClickListener(view -> {
             Intent intent = new Intent(MainActivity.this, AddCreditCardActivity.class);
-            startActivity(intent);
+            cadastroLauncher.launch(intent);
         });
     }
 
@@ -101,5 +144,37 @@ public class MainActivity extends AppCompatActivity{
                     startActivity(intent);
                 }
         );
+    }
+
+    private void mudarData(){
+        mainData.addAdapter(binding);
+        Calendar calendar = Calendar.getInstance();
+        int mes = calendar.get(Calendar.MONTH);
+        binding.mesId.setSelection(mes);
+        int ano = calendar.get(Calendar.YEAR);
+
+        for(Integer year : Year.getAnos()) {
+            if (year == ano) {
+                binding.anoId.setSelection(Year.getAnos().indexOf(year));
+            }
+        }
+
+        resgatarValueSpinner(binding.mesId);
+        resgatarValueSpinner(binding.anoId);
+    }
+
+    private void resgatarValueSpinner(Spinner spinner){
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                mainData.changeDate(binding, binding.mesId.getSelectedItem(), binding.anoId.getSelectedItem());
+                System.out.println(binding.mesId.getSelectedItem() .toString()+ " " + binding.anoId.getSelectedItem().toString());
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
     }
 }

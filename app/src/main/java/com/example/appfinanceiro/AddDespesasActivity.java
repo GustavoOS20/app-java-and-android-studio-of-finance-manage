@@ -3,13 +3,15 @@ package com.example.appfinanceiro;
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
 import android.view.MenuItem;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.appfinanceiro.data.AddDespesasData;
+import com.example.appfinanceiro.data.MainData;
 import com.example.appfinanceiro.databinding.ActivityAddDespesasBinding;
 import com.example.appfinanceiro.interfaces.AddDespesasInterface;
 import com.example.appfinanceiro.model.ModelExpense;
@@ -19,10 +21,11 @@ import com.example.appfinanceiro.verifications.VerificationsAdd;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.util.Objects;
-import java.util.UUID;
 
 public class AddDespesasActivity extends AppCompatActivity{
     private ActivityAddDespesasBinding binding;
+    private int mes;
+    private int ano;
     private String data;
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,14 +49,15 @@ public class AddDespesasActivity extends AppCompatActivity{
                 String valor = Objects.requireNonNull(binding.addValorField.getText()).toString();
                 String descricao = Objects.requireNonNull(binding.idDescricaoDes.getText()).toString();
                 String contaOrigem = Objects.requireNonNull(binding.contaOrigemId.getText()).toString();
-                String categoria = Objects.requireNonNull(binding.categoriaIdDes.getText()).toString();;
+                String categoria = Objects.requireNonNull(binding.categoriaIdDes.getText()).toString();
 
-                ModelExpense despesasData = new ModelExpense(valor, descricao, contaOrigem, categoria, data);
+                ModelExpense despesasData = new ModelExpense(valor, descricao, contaOrigem, categoria, data, mes, ano);
                 AddDespesasInterface addDespesasInterface = new AddDespesasData();
                 ServiceDespesas serviceDespesas = new ServiceDespesas(addDespesasInterface);
                 Snackbar.make(binding.getRoot(), "Valor" + valor + " /" + "Descrição" + descricao + " /" + "Conta Origem" + contaOrigem + " /" + "Categoria" + categoria, Snackbar.LENGTH_SHORT).show();
-
                 serviceDespesas.addDespesas(ViewUtilities.IdValue(), despesasData);
+                setResult(Activity.RESULT_OK);
+                finish();
             }
         });
     }
@@ -84,6 +88,8 @@ public class AddDespesasActivity extends AppCompatActivity{
 
     private void valueCalendar() {
         binding.calendarDespesas.setOnDateChangeListener((view, year, month, dayOfMonth) -> {
+            mes = month + 1;
+            ano = year;
             data = dayOfMonth + "/" + (month + 1) + "/" + year;
             binding.valorCalendar.setText(data);
         });

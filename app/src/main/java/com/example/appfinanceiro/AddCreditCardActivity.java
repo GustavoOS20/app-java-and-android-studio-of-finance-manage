@@ -5,7 +5,6 @@ import static android.view.View.VISIBLE;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
 import android.view.MenuItem;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,7 +12,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.appfinanceiro.adapter.AdapterSpinner;
 import com.example.appfinanceiro.data.AddCreditCard;
 import com.example.appfinanceiro.databinding.ActivityCardCreditBinding;
-import com.example.appfinanceiro.interfaces.AddBalanceInterface;
 import com.example.appfinanceiro.interfaces.AddCreditCardInterface;
 import com.example.appfinanceiro.model.ModelCreditCard;
 import com.example.appfinanceiro.model.Parcela;
@@ -31,7 +29,6 @@ public class AddCreditCardActivity extends AppCompatActivity {
     private String mes;
     private String ano;
     private BigDecimal bDValor;
-    private String valorLimpo;
     private int diaInt;
     private int mesInt;
     private int anoInt;
@@ -74,7 +71,8 @@ public class AddCreditCardActivity extends AppCompatActivity {
                 ModelCreditCard modelCreditCard = new ModelCreditCard(bDValor, banco, parcela.getNumero(), descricao, categoria, diaInt, mesInt, anoInt);
                 serviceCreditCard.addCreditCard(ViewUtilities.IdValue(), modelCreditCard);
                 Snackbar.make(binding.getRoot(), "Valor: " + valor + " /" + "Descrição: " + descricao + " /" + "Categoria: " + categoria + " /" + "Banco: " + banco + " /" + "Parcelas: " + parcela.getNumero(), Snackbar.LENGTH_SHORT).show();
-                backButton();
+                setResult(RESULT_OK);
+                finish();
             }
         });
 
@@ -117,7 +115,7 @@ public class AddCreditCardActivity extends AppCompatActivity {
     }
 
     public void formatarValores(String valor){
-        valorLimpo = valor.replace(".", "").replace(",", ".");
+        String valorLimpo = valor.replace(".", "").replace(",", ".");
         bDValor = new BigDecimal(valorLimpo);
         diaInt = Integer.parseInt(dia);
         mesInt = Integer.parseInt(mes);

@@ -1,6 +1,5 @@
 package com.example.appfinanceiro.interfaces;
 
-import com.example.appfinanceiro.data.AddBalanceData;
 import com.example.appfinanceiro.model.ModelBalance;
 
 import java.util.Map;

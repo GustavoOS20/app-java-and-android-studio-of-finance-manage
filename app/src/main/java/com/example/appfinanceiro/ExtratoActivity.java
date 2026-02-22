@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.MenuItem;
 
 import com.example.appfinanceiro.databinding.ActivityExtratoBinding;
@@ -26,15 +27,13 @@ public class ExtratoActivity extends AddBalanceActivity{
     private void actionBar(){
         setSupportActionBar(binding.toolbar6);
         ViewUtilities.actionBar(this, true);
+        onCreateOptionsMenu(binding.toolbar6.getMenu());
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == android.R.id.home) {
-            finish();
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_item, menu);
+        return true;
     }
 
     private void inicializarLayout(){
@@ -46,8 +45,8 @@ public class ExtratoActivity extends AddBalanceActivity{
         binding.homeButton.setBackgroundTintList(buttonColorDisabled);
 
         binding.ExtratoButton.setOnClickListener(v-> {
-                    binding.ExtratoButton.setBackgroundTintList(buttonColorDisabled);
-                    binding.homeButton.setBackgroundTintList(buttonColorEnabled);
+                    binding.ExtratoButton.setBackgroundTintList(buttonColorEnabled);
+                    binding.homeButton.setBackgroundTintList(buttonColorDisabled);
                 }
         );
         binding.homeButton.setOnClickListener(v-> {

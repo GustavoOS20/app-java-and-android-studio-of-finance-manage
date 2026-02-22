@@ -4,26 +4,27 @@
     xmlns:tools="http://schemas.android.com/tools"
     style="@style/Widget.AppCompat.DrawerArrowToggle"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/fundoColor">
+
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar6"
-        android:layout_width="411dp"
+        android:layout_width="0dp"
         android:layout_height="71dp"
-        android:background="?attr/colorOnPrimaryFixedVariant"
+        android:background="@color/menuColor"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
-        app:layout_constraintBottom_toTopOf="@+id/calendarView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.cardview.widget.CardView
-        android:layout_width="377dp"
-        android:layout_height="495dp"
-        app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView"
+        android:id="@+id/cardView"
+        android:layout_width="389dp"
+        android:layout_height="501dp"
+        android:layout_marginTop="70dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar6">
@@ -35,11 +36,12 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerView"
                 android:layout_width="match_parent"
-                android:layout_height="434dp"
+                android:layout_height="match_parent"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentEnd="true"
                 android:layout_marginTop="63dp"
                 android:layout_marginEnd="0dp"
+                android:background="@color/colorRecycle"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -49,28 +51,30 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="493dp"
-                android:orientation="horizontal">
+                android:layout_height="wrap_content"
+                android:background="@color/colorRecycle"
+                android:orientation="horizontal"
+                android:padding="10dp">
 
                 <TextView
                     android:id="@+id/textView8"
-                    android:layout_width="82dp"
-                    android:layout_height="60dp"
+                    android:layout_width="124dp"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:padding="10dp"
                     android:text="TextView" />
 
                 <TextView
                     android:id="@+id/textView9"
-                    android:layout_width="166dp"
-                    android:layout_height="60dp"
+                    android:layout_width="190dp"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:padding="10dp"
                     android:text="TextView" />
 
                 <TextView
                     android:id="@+id/textView10"
-                    android:layout_width="wrap_content"
+                    android:layout_width="122dp"
                     android:layout_height="58dp"
                     android:layout_weight="1"
                     android:padding="10dp"
@@ -81,43 +85,57 @@
     </androidx.cardview.widget.CardView>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottomNavigationView"
-        android:layout_width="406dp"
-        android:layout_height="84dp"
-        android:layout_marginTop="8dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/borda_perso_bottom"
+        android:padding="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/AddValues"
-        app:layout_constraintVertical_bias="0.461">
+        app:layout_constraintTop_toBottomOf="@+id/cardView"
+        app:layout_constraintVertical_bias="0.9">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="horizontal">
 
-            <Button
-                android:id="@+id/homeButton"
-                android:layout_width="182dp"
-                android:layout_height="79dp"
-                android:layout_weight="1"
-                android:insetLeft="10dp"
-                android:insetTop="10dp"
-                android:insetRight="10dp"
-                android:insetBottom="10dp"
-                android:text="Home"
-                app:backgroundTint="#925FBC" />
+            <LinearLayout
+                android:layout_width="166dp"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:padding="2dp">
 
-            <Button
-                android:id="@+id/ExtratoButton"
-                android:layout_width="223dp"
-                android:layout_height="79dp"
-                android:insetLeft="50dp"
-                android:insetTop="10dp"
-                android:insetRight="10dp"
-                android:insetBottom="10dp"
-                android:text="Extrato"
-                app:backgroundTint="#925FBC" />
+                <Button
+                    android:id="@+id/homeButton"
+                    style="@style/Widget.AppCompat.Button"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/borda_personalizada"
+                    android:text="Home"
+                    app:backgroundTint="@color/menuColor"
+                    tools:ignore="HardcodedText" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="169dp"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:padding="2dp">
+
+                <Button
+                    android:id="@+id/ExtratoButton"
+                    style="@style/Widget.AppCompat.Button"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/borda_personalizada"
+                    android:text="Extrato"
+                    app:backgroundTint="@color/menuColor"
+                    tools:ignore="HardcodedText" />
+            </LinearLayout>
+
         </LinearLayout>
     </com.google.android.material.bottomnavigation.BottomNavigationView>
 

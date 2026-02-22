@@ -8,7 +8,6 @@ import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Spinner;
@@ -19,16 +18,12 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.appfinanceiro.adapter.AdapterDataMainMes;
-import com.example.appfinanceiro.adapter.AdapterDataMainYear;
 import com.example.appfinanceiro.data.MainData;
 import com.example.appfinanceiro.databinding.ActivityMainBinding;
-import com.example.appfinanceiro.model.Mes;
 import com.example.appfinanceiro.model.Year;
 import com.example.appfinanceiro.utilitiesClass.ViewUtilities;
 
 import java.util.Calendar;
-import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity{
     MainData mainData = new MainData();
@@ -88,13 +83,6 @@ public class MainActivity extends AppCompatActivity{
     private void actionBar(){
         setSupportActionBar(binding.toolbar);
         ViewUtilities.actionBar(this, false);
-        onCreateOptionsMenu(binding.toolbar.getMenu());
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_item, menu);
-        return true;
     }
 
     private void fabAddAndRemove() {

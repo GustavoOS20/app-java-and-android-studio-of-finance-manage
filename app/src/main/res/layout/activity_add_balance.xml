@@ -3,21 +3,20 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/fundoColor">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar2"
-        android:layout_width="411dp"
+        android:layout_width="0dp"
         android:layout_height="71dp"
-        android:background="?attr/colorOnPrimaryFixedVariant"
+        android:background="@color/menuColor"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
-        app:layout_constraintBottom_toTopOf="@+id/calendarView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/AddSaldoField"
@@ -30,7 +29,8 @@
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.909" />
+        app:layout_constraintVertical_bias="0.909"
+        android:textColorHint="@color/gray_400"/>
 
     <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/IdDescricao"
@@ -43,7 +43,8 @@
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.921" />
+        app:layout_constraintVertical_bias="0.921"
+        android:textColorHint="@color/gray_400"/>
 
     <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/ContaDestinoId"
@@ -54,7 +55,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:textColorHint="@color/gray_400"/>
 
     <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/StatusId"
@@ -65,7 +67,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:textColorHint="@color/gray_400"/>
 
     <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/CategoriaId"
@@ -76,19 +79,23 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ContaDestinoId" />
+        app:layout_constraintTop_toBottomOf="@+id/ContaDestinoId"
+        android:textColorHint="@color/gray_400"/>
 
     <Button
         android:id="@+id/AddSaldoButton"
+        style="@style/Widget.AppCompat.Button"
         android:layout_width="126dp"
         android:layout_height="65dp"
+        android:background="@drawable/borda_personalizada"
         android:text="Adicionar"
+        app:backgroundTint="@color/menuColor"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/StatusId"
-        app:layout_constraintVertical_bias="0.842" />
+        app:layout_constraintVertical_bias="0.841" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fabCalendarBalance"

@@ -5,7 +5,9 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/fundoColor"
     tools:context=".MainActivity">
+
 
     <Spinner
         android:id="@+id/anoId"
@@ -20,33 +22,39 @@
 
     <Button
         android:id="@+id/addDespesas"
-        android:layout_width="199dp"
-        android:layout_height="49dp"
+        style="@style/Widget.AppCompat.Button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginEnd="5dp"
+        android:layout_marginBottom="10dp"
         android:text="Adicionar Despesas"
-        app:backgroundTint="#925FBC"
+        app:backgroundTint="@color/menuColor"
         app:layout_constraintBottom_toTopOf="@+id/AddSaldo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline2"
         app:layout_constraintVertical_bias="1.0"
+        android:background="@drawable/borda_personalizada"
         tools:ignore="HardcodedText" />
 
     <Button
         android:id="@+id/addCartao"
-        android:layout_width="199dp"
-        android:layout_height="49dp"
+        style="@style/Widget.AppCompat.Button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginEnd="5dp"
+        android:layout_marginBottom="10dp"
+        android:elevation="10dp"
         android:text="Adicionar Cartão"
-        app:backgroundTint="#925FBC"
-        android:translationZ="8dp"
+        app:backgroundTint="@color/menuColor"
         app:layout_constraintBottom_toTopOf="@+id/addDespesas"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline2"
-        app:layout_constraintVertical_bias="1.0"
+        app:layout_constraintVertical_bias="0.854"
+        android:background="@drawable/borda_personalizada"
         tools:ignore="HardcodedText" />
 
     <TextView
@@ -61,6 +69,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/saldoId"
+        android:textColor="@color/textColorBalance"
         app:layout_constraintVertical_bias="0.0"
         tools:ignore="HardcodedText" />
 
@@ -76,21 +85,23 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.261"
+        app:layout_constraintVertical_bias="0.217"
+        android:textColor="@color/textColorCalendar"
         tools:ignore="HardcodedText" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/AddValues"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="90dp"
+        android:layout_marginBottom="110dp"
+        android:backgroundTint="@color/menuColor"
         android:icon="@drawable/outline_add_circle_24"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.954"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline2"
-        app:layout_constraintVertical_bias="0.951" />
+        app:layout_constraintVertical_bias="0.975" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline2"
@@ -102,13 +113,14 @@
         android:layout_width="287dp"
         android:layout_height="103dp"
         android:layout_margin="10dp"
+        android:gravity="center"
         android:text="Despesas"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/receitasId"
-        android:gravity="center"
+        android:textColor="@color/textColorDespesas"
         app:layout_constraintVertical_bias="0.0"
         tools:ignore="HardcodedText" />
 
@@ -124,87 +136,108 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/DespesasId"
+        android:textColor="@color/textColorDespesas"
         app:layout_constraintVertical_bias="0.0"
-        tools:ignore="HardcodedText" />
+        tools:ignore="HardcodedText"
+        />
 
     <Button
         android:id="@+id/AddSaldo"
+        style="@style/Widget.AppCompat.Button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="5dp"
         android:layout_marginBottom="10dp"
         android:text="Adicionar Saldo"
-        app:backgroundTint="#925FBC"
+        app:backgroundTint="@color/menuColor"
         app:layout_constraintBottom_toTopOf="@+id/AddValues"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline2"
-        app:layout_constraintVertical_bias="1.0"
+        android:background="@drawable/borda_personalizada"
+        app:layout_constraintVertical_bias="0.886"
         tools:ignore="HardcodedText" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:layout_width="406dp"
-        android:layout_height="84dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/borda_perso_bottom"
+        android:padding="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/AddValues"
-        app:layout_constraintVertical_bias="0.461">
+        app:layout_constraintVertical_bias="0.9">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="horizontal">
 
-            <Button
-                android:id="@+id/homeButton"
-                android:layout_width="182dp"
-                android:layout_height="79dp"
-                android:layout_weight="1"
-                android:insetLeft="10dp"
-                android:insetTop="10dp"
-                android:insetRight="10dp"
-                android:insetBottom="10dp"
-                android:text="Home"
-                app:backgroundTint="#925FBC"
-                tools:ignore="HardcodedText" />
+            <LinearLayout
+                android:layout_width="166dp"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:padding="2dp">
 
-            <Button
-                android:id="@+id/ExtratoButton"
-                android:layout_width="223dp"
-                android:layout_height="79dp"
-                android:insetLeft="50dp"
-                android:insetTop="10dp"
-                android:insetRight="10dp"
-                android:insetBottom="10dp"
-                android:text="Extrato"
-                app:backgroundTint="#925FBC"
-                tools:ignore="HardcodedText" />
+                <Button
+                    android:id="@+id/homeButton"
+                    style="@style/Widget.AppCompat.Button"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/borda_personalizada"
+                    android:text="Home"
+                    app:backgroundTint="@color/menuColor"
+                    tools:ignore="HardcodedText" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="169dp"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:padding="2dp">
+
+                <Button
+                    android:id="@+id/ExtratoButton"
+                    style="@style/Widget.AppCompat.Button"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/borda_personalizada"
+                    android:text="Extrato"
+                    app:backgroundTint="@color/menuColor"
+                    tools:ignore="HardcodedText" />
+            </LinearLayout>
+
         </LinearLayout>
     </com.google.android.material.bottomnavigation.BottomNavigationView>
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
-        android:layout_width="411dp"
+        android:layout_width="0dp"
         android:layout_height="71dp"
-        android:background="?attr/colorOnPrimaryFixedVariant"
+        android:background="@color/menuColor"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
+        app:layout_constraintBottom_toTopOf="@+id/saldoId"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
 
     <Spinner
         android:id="@+id/mesId"
         android:layout_width="148dp"
         android:layout_height="33dp"
-        android:layout_marginStart="60dp"
+        android:layout_marginEnd="39dp"
         app:layout_constraintBottom_toTopOf="@+id/saldoId"
+        app:layout_constraintEnd_toStartOf="@+id/anoId"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar"
-        app:layout_constraintVertical_bias="0.522" />
+        app:layout_constraintVertical_bias="0.512" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

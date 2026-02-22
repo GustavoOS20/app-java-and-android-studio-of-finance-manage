@@ -1,7 +1,5 @@
 package com.example.appfinanceiro.data;
 
-
-import com.example.appfinanceiro.MainActivity;
 import com.example.appfinanceiro.adapter.AdapterDataMainMes;
 import com.example.appfinanceiro.adapter.AdapterDataMainYear;
 import com.example.appfinanceiro.databinding.ActivityMainBinding;
@@ -9,9 +7,6 @@ import com.example.appfinanceiro.interfaces.AddBalanceInterface;
 import com.example.appfinanceiro.interfaces.AddCreditCardInterface;
 import com.example.appfinanceiro.interfaces.AddDespesasInterface;
 import com.example.appfinanceiro.model.Mes;
-import com.example.appfinanceiro.model.ModelBalance;
-import com.example.appfinanceiro.model.ModelCreditCard;
-import com.example.appfinanceiro.model.ModelExpense;
 import com.example.appfinanceiro.model.Year;
 import com.example.appfinanceiro.service.ServiceBalance;
 import com.example.appfinanceiro.service.ServiceCreditCard;
@@ -126,10 +121,11 @@ public class MainData {
                 Mes.getMesArrayList().add(mes1);
             }
         }
+        Year year = new Year();
         if(!Year.getAnos().isEmpty()) {
             Year.getAnos().clear();
+            year.gerarAnos();
         }else{
-            Year year = new Year();
             year.gerarAnos();
         }
         AdapterDataMainYear adapterDataMainYear = new AdapterDataMainYear(binding.getRoot().getContext(), Year.getAnos());

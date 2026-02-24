@@ -93,9 +93,9 @@
         android:id="@+id/AddValues"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="110dp"
+        android:layout_marginBottom="140dp"
         android:backgroundTint="@color/menuColor"
-        android:icon="@drawable/outline_add_circle_24"
+        android:icon="@drawable/outline_add_24"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.954"
@@ -166,54 +166,16 @@
         android:layout_marginBottom="8dp"
         android:background="@drawable/borda_perso_bottom"
         android:padding="10dp"
+        android:id="@+id/bottomNavigation"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/AddValues"
-        app:layout_constraintVertical_bias="0.9">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal">
-
-            <LinearLayout
-                android:layout_width="166dp"
-                android:layout_height="match_parent"
-                android:orientation="horizontal"
-                android:padding="2dp">
-
-                <Button
-                    android:id="@+id/homeButton"
-                    style="@style/Widget.AppCompat.Button"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/borda_personalizada"
-                    android:text="Home"
-                    app:backgroundTint="@color/menuColor"
-                    tools:ignore="HardcodedText" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="169dp"
-                android:layout_height="match_parent"
-                android:orientation="horizontal"
-                android:padding="2dp">
-
-                <Button
-                    android:id="@+id/ExtratoButton"
-                    style="@style/Widget.AppCompat.Button"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/borda_personalizada"
-                    android:text="Extrato"
-                    app:backgroundTint="@color/menuColor"
-                    tools:ignore="HardcodedText" />
-            </LinearLayout>
-
-        </LinearLayout>
-    </com.google.android.material.bottomnavigation.BottomNavigationView>
+        app:layout_constraintVertical_bias="1.0"
+        app:menu="@menu/bottom_menu"
+        app:itemIconTint="@color/nav_colors"
+        app:itemTextColor="@color/nav_colors"
+        app:labelVisibilityMode="labeled"/>
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"

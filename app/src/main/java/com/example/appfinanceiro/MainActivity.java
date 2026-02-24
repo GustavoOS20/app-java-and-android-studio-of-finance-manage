@@ -117,20 +117,14 @@ public class MainActivity extends AppCompatActivity{
     }
 
     private void menuNavegation(){
-        binding.ExtratoButton.setBackgroundTintList(buttonColorDisabled);
-
-        binding.homeButton.setOnClickListener(v-> {
-                    binding.ExtratoButton.setBackgroundTintList(buttonColorDisabled);
-                    binding.homeButton.setBackgroundTintList(buttonColorEnabled);
-                }
-        );
-        binding.ExtratoButton.setOnClickListener(v-> {
-                    binding.homeButton.setBackgroundTintList(buttonColorDisabled);
-                    binding.ExtratoButton.setBackgroundTintList(buttonColorEnabled);
-                    Intent intent = new Intent(MainActivity.this, ExtratoActivity.class);
-                    cadastroLauncher.launch(intent);
-                }
-        );
+        binding.bottomNavigation.setOnItemSelectedListener(v-> {
+            if (binding.bottomNavigation.getSelectedItemId() != v.getItemId()) {
+                Intent intent = new Intent(MainActivity.this, ExtratoActivity.class);
+                cadastroLauncher.launch(intent);
+                overridePendingTransition(0, 0);
+            }
+            return true;
+        });
     }
 
     private void mudarData(){

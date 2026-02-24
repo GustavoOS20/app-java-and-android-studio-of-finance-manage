@@ -21,6 +21,7 @@ import com.example.appfinanceiro.service.ServiceBalance;
 import com.example.appfinanceiro.utilitiesClass.ViewUtilities;
 import com.example.appfinanceiro.verifications.VerificationsAdd;
 
+import java.math.BigDecimal;
 import java.util.Objects;
 
 public class AddBalanceActivity extends AppCompatActivity {
@@ -85,7 +86,8 @@ public class AddBalanceActivity extends AppCompatActivity {
                 String status = Objects.requireNonNull(binding.StatusId.getText()).toString();
                 String categoria = Objects.requireNonNull(binding.CategoriaId.getText()).toString();
 
-                ModelBalance balanceData = new ModelBalance(saldo, descricao, contaDestino, status, categoria, data, mes, ano);
+                BigDecimal bigDecimal = new BigDecimal(saldo);
+                ModelBalance balanceData = new ModelBalance(bigDecimal, descricao, contaDestino, status, categoria, data, mes, ano);
                 AddBalanceInterface balanceInterface = new AddBalanceData();
                 ServiceBalance serviceBalance = new ServiceBalance(balanceInterface);
                 serviceBalance.addBalance(ViewUtilities.IdValue(), balanceData);

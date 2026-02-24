@@ -18,24 +18,28 @@
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
             android:padding="10dp"
-            android:text="TextView" />
+            android:text="TextView"
+            android:textColor="@color/gray_400"
+            android:id="@+id/dataId"/>
 
         <TextView
-            android:id="@+id/textViewItem"
+            android:id="@+id/descricaoId"
             android:layout_width="169dp"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
             android:padding="10dp"
-            android:text="TextView" />
+            android:text="TextView"
+            android:textColor="@color/gray_400"/>
 
         <TextView
-            android:id="@+id/textViewItem2"
+            android:id="@+id/saldoId"
             android:layout_width="116dp"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
             android:layout_weight="1"
             android:padding="10dp"
-            android:text="TextView" />
+            android:text="TextView"
+            android:textColor="@color/gray_400"/>
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

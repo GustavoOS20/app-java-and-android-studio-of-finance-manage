@@ -22,8 +22,8 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
-        android:layout_width="389dp"
-        android:layout_height="501dp"
+        android:layout_width="362dp"
+        android:layout_height="609dp"
         android:layout_marginTop="70dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -62,7 +62,8 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:padding="10dp"
-                    android:text="TextView" />
+                    android:text="Data"
+                    android:textColor="@color/gray_400" />
 
                 <TextView
                     android:id="@+id/textView9"
@@ -70,7 +71,10 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:padding="10dp"
-                    android:text="TextView" />
+                    android:text="Descrição"
+                    android:textColor="@color/gray_400"
+                    app:tint="@color/gray_400"
+                    />
 
                 <TextView
                     android:id="@+id/textView10"
@@ -78,7 +82,8 @@
                     android:layout_height="58dp"
                     android:layout_weight="1"
                     android:padding="10dp"
-                    android:text="TextView" />
+                    android:text="Valor"
+                    android:textColor="@color/gray_400" />
             </LinearLayout>
 
         </RelativeLayout>
@@ -94,49 +99,11 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cardView"
-        app:layout_constraintVertical_bias="0.9">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal">
-
-            <LinearLayout
-                android:layout_width="166dp"
-                android:layout_height="match_parent"
-                android:orientation="horizontal"
-                android:padding="2dp">
-
-                <Button
-                    android:id="@+id/homeButton"
-                    style="@style/Widget.AppCompat.Button"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/borda_personalizada"
-                    android:text="Home"
-                    app:backgroundTint="@color/menuColor"
-                    tools:ignore="HardcodedText" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="169dp"
-                android:layout_height="match_parent"
-                android:orientation="horizontal"
-                android:padding="2dp">
-
-                <Button
-                    android:id="@+id/ExtratoButton"
-                    style="@style/Widget.AppCompat.Button"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/borda_personalizada"
-                    android:text="Extrato"
-                    app:backgroundTint="@color/menuColor"
-                    tools:ignore="HardcodedText" />
-            </LinearLayout>
-
-        </LinearLayout>
-    </com.google.android.material.bottomnavigation.BottomNavigationView>
+        app:layout_constraintVertical_bias="1.0"
+        app:menu="@menu/bottom_menu"
+        android:id="@+id/bottomNavigationEx"
+        app:itemIconTint="@color/nav_colors"
+        app:itemTextColor="@color/nav_colors"
+        app:labelVisibilityMode="labeled"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

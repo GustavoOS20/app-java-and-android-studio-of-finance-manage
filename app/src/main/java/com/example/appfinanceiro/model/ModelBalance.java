@@ -1,7 +1,9 @@
 package com.example.appfinanceiro.model;
 
-public class ModelBalance {
-    private final String saldo;
+import java.math.BigDecimal;
+
+public class ModelBalance extends FinanceModel {
+    private final BigDecimal saldo;
     private final String descricao;
     private final String contaDestino;
     private final String status;
@@ -11,7 +13,7 @@ public class ModelBalance {
     private final int ano;
 
 
-    public ModelBalance(String saldo, String descricao, String contaDestino, String status, String categoria, String data, int mes, int ano) {
+    public ModelBalance(BigDecimal saldo, String descricao, String contaDestino, String status, String categoria, String data, int mes, int ano) {
         this.saldo = saldo;
         this.descricao = descricao;
         this.contaDestino = contaDestino;
@@ -26,7 +28,7 @@ public class ModelBalance {
         return descricao;
     }
 
-    public String getSaldo() {
+    public BigDecimal getSaldo() {
         return saldo;
     }
 

@@ -1,7 +1,9 @@
 package com.example.appfinanceiro.model;
 
-public class ModelExpense {
-    private final String valor;
+import java.math.BigDecimal;
+
+public class ModelExpense extends FinanceModel {
+    private final BigDecimal valor;
     private final String descricao;
     private final String data;
     private final String contaOrigem;
@@ -9,7 +11,7 @@ public class ModelExpense {
     private final int mes;
     private final int ano;
 
-    public ModelExpense(String valor, String descricao, String data, String contaOrigem, String categoria, int mes, int ano) {
+    public ModelExpense(BigDecimal valor, String descricao, String data, String contaOrigem, String categoria, int mes, int ano) {
         this.valor = valor;
         this.descricao = descricao;
         this.data = data;
@@ -27,7 +29,7 @@ public class ModelExpense {
         return ano;
     }
 
-    public String getValor() {
+    public BigDecimal getValor() {
         return valor;
     }
 

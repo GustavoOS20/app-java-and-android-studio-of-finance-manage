@@ -7,6 +7,10 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+
+import com.example.appfinanceiro.adapter.AdapterExtrato;
 import com.example.appfinanceiro.databinding.ActivityExtratoBinding;
 import com.example.appfinanceiro.utilitiesClass.ViewUtilities;
 
@@ -22,11 +26,12 @@ public class ExtratoActivity extends AddBalanceActivity{
         ViewUtilities.setMargins(binding.getRoot());
         menuNavegation();
         actionBar();
+        adicionarElementos();
     }
 
     private void actionBar(){
         setSupportActionBar(binding.toolbar6);
-        ViewUtilities.actionBar(this, true);
+        ViewUtilities.actionBar(this, false);
         onCreateOptionsMenu(binding.toolbar6.getMenu());
     }
 
@@ -41,21 +46,22 @@ public class ExtratoActivity extends AddBalanceActivity{
         setContentView(binding.getRoot());
     }
 
-    private void menuNavegation(){
-        binding.homeButton.setBackgroundTintList(buttonColorDisabled);
+    private void adicionarElementos(){
+        binding.recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        binding.recyclerView.setAdapter(new AdapterExtrato());
+    }
 
-        binding.ExtratoButton.setOnClickListener(v-> {
-                    binding.ExtratoButton.setBackgroundTintList(buttonColorEnabled);
-                    binding.homeButton.setBackgroundTintList(buttonColorDisabled);
-                }
-        );
-        binding.homeButton.setOnClickListener(v-> {
-                    binding.homeButton.setBackgroundTintList(buttonColorDisabled);
-                    binding.ExtratoButton.setBackgroundTintList(buttonColorEnabled);
-                    Intent intent = new Intent(ExtratoActivity.this, MainActivity.class);
-                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-                    startActivity(intent);
-                }
+    private void menuNavegation(){
+        binding.bottomNavigationEx.setSelectedItemId(R.id.nav_extrato);
+        binding.bottomNavigationEx.setOnItemSelectedListener(v-> {
+            if (binding.bottomNavigationEx.getSelectedItemId() != v.getItemId()) {
+                Intent intent = new Intent(ExtratoActivity.this, MainActivity.class);
+                startActivity(intent);
+                finish();
+                overridePendingTransition(0, 0);
+            }
+            return true;
+        }
         );
     }
 }

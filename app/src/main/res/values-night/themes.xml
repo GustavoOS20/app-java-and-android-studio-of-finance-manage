@@ -2,5 +2,9 @@
     <!-- Base application theme. -->
     <style name="Base.Theme.AppFinanceiro" parent="Theme.Material3.DayNight.NoActionBar">
         <item name="colorOnPrimary">@color/fundoColor</item>
+        <item name="colorOnSecondary">@color/gray_400</item>
+        <item name="itemTextColor">@color/gray_400</item>
+
+
     </style>
 </resources>

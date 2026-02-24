@@ -53,7 +53,7 @@ public class MainData {
         dataPresente();
         int despesasFor = serviceDespesas.getDespesas().values().stream()
                 .filter(expense -> expense.getMes() == mes && expense.getAno() == ano).
-                mapToInt(expense -> Integer.parseInt(expense.getValor())).
+                mapToInt(expense -> expense.getValor().intValue()).
                 sum();
         despesas += despesasFor;
    }
@@ -62,7 +62,7 @@ public class MainData {
        dataPresente();
        int balance = serviceBalance.getBalances().values().stream()
                .filter(balance1 -> balance1.getMes() == mes && balance1.getAno() == ano)
-               .mapToInt(balance1 -> Integer.parseInt(balance1.getSaldo())).
+               .mapToInt(balance1 -> balance1.getSaldo().intValue()).
                sum();
        receitas += balance;
     }
@@ -99,11 +99,11 @@ public class MainData {
         receitas = 0;
         saldoCartao = 0;
 
-        int despesas = serviceDespesas.getDespesas().values().stream().filter(expense -> expense.getMes() == mesFor && expense.getAno() == anoFor).mapToInt(expense -> Integer.parseInt(expense.getValor())).sum();
+        int despesas = serviceDespesas.getDespesas().values().stream().filter(expense -> expense.getMes() == mesFor && expense.getAno() == anoFor).mapToInt(expense -> expense.getValor().intValue()).sum();
         String despesasFormat = "Despesas: " + despesas;
         binding.DespesasId.setText(despesasFormat);
 
-        int balance = serviceBalance.getBalances().values().stream().filter(balance1 -> balance1.getMes() == mesFor && balance1.getAno() == anoFor).mapToInt(balance1 -> Integer.parseInt(balance1.getSaldo())).sum();
+        int balance = serviceBalance.getBalances().values().stream().filter(balance1 -> balance1.getMes() == mesFor && balance1.getAno() == anoFor).mapToInt(balance1 -> balance1.getSaldo().intValue()).sum();
         String balanceFormat = "Saldo: " + balance;
         binding.saldoId.setText(balanceFormat);
 

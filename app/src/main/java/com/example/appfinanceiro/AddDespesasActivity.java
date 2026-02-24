@@ -20,6 +20,7 @@ import com.example.appfinanceiro.utilitiesClass.ViewUtilities;
 import com.example.appfinanceiro.verifications.VerificationsAdd;
 import com.google.android.material.snackbar.Snackbar;
 
+import java.math.BigDecimal;
 import java.util.Objects;
 
 public class AddDespesasActivity extends AppCompatActivity{
@@ -51,7 +52,8 @@ public class AddDespesasActivity extends AppCompatActivity{
                 String contaOrigem = Objects.requireNonNull(binding.contaOrigemId.getText()).toString();
                 String categoria = Objects.requireNonNull(binding.categoriaIdDes.getText()).toString();
 
-                ModelExpense despesasData = new ModelExpense(valor, descricao, contaOrigem, categoria, data, mes, ano);
+                BigDecimal valorBigDecimal = new BigDecimal(valor);
+                ModelExpense despesasData = new ModelExpense(valorBigDecimal, descricao, contaOrigem, categoria, data, mes, ano);
                 AddDespesasInterface addDespesasInterface = new AddDespesasData();
                 ServiceDespesas serviceDespesas = new ServiceDespesas(addDespesasInterface);
                 Snackbar.make(binding.getRoot(), "Valor" + valor + " /" + "Descrição" + descricao + " /" + "Conta Origem" + contaOrigem + " /" + "Categoria" + categoria, Snackbar.LENGTH_SHORT).show();

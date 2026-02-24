@@ -2,7 +2,7 @@ package com.example.appfinanceiro.model;
 
 import java.math.BigDecimal;
 
-public class ModelCreditCard {
+public class ModelCreditCard extends FinanceModel {
     private final BigDecimal valor;
     private final String bankcCard;
     private final int parcelas;
@@ -53,5 +53,9 @@ public class ModelCreditCard {
 
     public int getAno() {
         return ano;
+    }
+
+    public String getData(){
+        return dia + "/" + mes + "/" + ano;
     }
 }

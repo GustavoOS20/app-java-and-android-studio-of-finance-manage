@@ -22,7 +22,7 @@ public class MainData {
     ServiceDespesas serviceDespesas = new ServiceDespesas(addDespesasInterface);
     AddBalanceInterface addBalanceInterface = new AddBalanceData();
     ServiceBalance serviceBalance = new ServiceBalance(addBalanceInterface);
-    private int saldo;
+    private static int saldo;
     private int receitas;
     private int despesas;
     private double saldoCartao;
@@ -33,8 +33,12 @@ public class MainData {
         return saldo;
     }
 
-    public void setSaldo() {
-        saldo = receitas - despesas;
+    public int getMes() {
+        return mes;
+    }
+
+    public int getAno() {
+        return ano;
     }
 
     public int getDespesas() {
@@ -47,6 +51,14 @@ public class MainData {
 
     public double getSaldoCartao() {
         return saldoCartao;
+    }
+
+    public void setSaldoAdd(int valor) {
+        saldo += valor;
+    }
+
+    public void setSaldoRemove(int valor) {
+        saldo -= valor;
     }
 
     public void despesas() {
@@ -76,7 +88,7 @@ public class MainData {
         saldoCartao += cartao;
     }
 
-    private void dataPresente(){
+    public void dataPresente(){
         mes = calendar.get(Calendar.MONTH) + 1;
         ano = calendar.get(Calendar.YEAR);
     }
@@ -104,14 +116,12 @@ public class MainData {
         binding.DespesasId.setText(despesasFormat);
 
         int balance = serviceBalance.getBalances().values().stream().filter(balance1 -> balance1.getMes() == mesFor && balance1.getAno() == anoFor).mapToInt(balance1 -> balance1.getSaldo().intValue()).sum();
-        String balanceFormat = "Saldo: " + balance;
-        binding.saldoId.setText(balanceFormat);
+        String balanceFormat = "Receita: " + balance;
+        binding.receitasId.setText(balanceFormat);
 
         double cartao = serviceCreditCard.getCreditCards().values().stream().filter(creditCard -> creditCard.getMes() == mesFor && creditCard.getAno() == anoFor).mapToDouble(creditCard -> creditCard.getValor().doubleValue()).sum();
         String cartaoFormat = "Saldo Cartão: " + cartao;
         binding.saldoCartO.setText(cartaoFormat);
-
-        setSaldo();
     }
 
     public void addAdapter(ActivityMainBinding binding){

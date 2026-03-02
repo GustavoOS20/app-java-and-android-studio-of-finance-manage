@@ -14,13 +14,13 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
+            android:id="@+id/dataId"
             android:layout_width="92dp"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
             android:padding="10dp"
             android:text="TextView"
-            android:textColor="@color/gray_400"
-            android:id="@+id/dataId"/>
+            android:textColor="@color/black" />
 
         <TextView
             android:id="@+id/descricaoId"
@@ -29,7 +29,7 @@
             android:layout_margin="5dp"
             android:padding="10dp"
             android:text="TextView"
-            android:textColor="@color/gray_400"/>
+            android:textColor="@color/black" />
 
         <TextView
             android:id="@+id/saldoId"
@@ -39,7 +39,7 @@
             android:layout_weight="1"
             android:padding="10dp"
             android:text="TextView"
-            android:textColor="@color/gray_400"/>
+            android:textColor="@color/black" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

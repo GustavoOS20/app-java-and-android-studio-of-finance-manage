@@ -21,13 +21,15 @@ import com.example.appfinanceiro.verifications.VerificationsAdd;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.Objects;
 
 public class AddDespesasActivity extends AppCompatActivity{
     private ActivityAddDespesasBinding binding;
     private int mes;
     private int ano;
-    private String data;
+    private LocalDate data;
+    private String dataF;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,18 +48,20 @@ public class AddDespesasActivity extends AppCompatActivity{
 
     private void confirmAdd() {
         binding.addSaldoButton.setOnClickListener(view -> {
-            if (VerificationsAdd.verifyAddDespesas(binding, data)) {
+            if (VerificationsAdd.verifyAddDespesas(binding, dataF)) {
                 String valor = Objects.requireNonNull(binding.addValorField.getText()).toString();
                 String descricao = Objects.requireNonNull(binding.idDescricaoDes.getText()).toString();
                 String contaOrigem = Objects.requireNonNull(binding.contaOrigemId.getText()).toString();
                 String categoria = Objects.requireNonNull(binding.categoriaIdDes.getText()).toString();
 
                 BigDecimal valorBigDecimal = new BigDecimal(valor);
-                ModelExpense despesasData = new ModelExpense(valorBigDecimal, descricao, contaOrigem, categoria, data, mes, ano);
+                ModelExpense despesasData = new ModelExpense(valorBigDecimal, descricao, data, contaOrigem, categoria , mes, ano);
                 AddDespesasInterface addDespesasInterface = new AddDespesasData();
                 ServiceDespesas serviceDespesas = new ServiceDespesas(addDespesasInterface);
                 Snackbar.make(binding.getRoot(), "Valor" + valor + " /" + "Descrição" + descricao + " /" + "Conta Origem" + contaOrigem + " /" + "Categoria" + categoria, Snackbar.LENGTH_SHORT).show();
                 serviceDespesas.addDespesas(ViewUtilities.IdValue(), despesasData);
+                MainData mainData = new MainData();
+                mainData.setSaldoRemove(Integer.parseInt(valor));
                 setResult(Activity.RESULT_OK);
                 finish();
             }
@@ -92,8 +96,10 @@ public class AddDespesasActivity extends AppCompatActivity{
         binding.calendarDespesas.setOnDateChangeListener((view, year, month, dayOfMonth) -> {
             mes = month + 1;
             ano = year;
-            data = dayOfMonth + "/" + (month + 1) + "/" + year;
-            binding.valorCalendar.setText(data);
+            String dataS = String.valueOf(dayOfMonth+""+(month + 1)+"" + year);
+            data = LocalDate.parse(dataS);
+            dataF = dayOfMonth + "/" + (month + 1) + "/" + year;
+            binding.valorCalendar.setText(dataF);
         });
     }
 }

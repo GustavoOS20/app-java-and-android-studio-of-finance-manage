@@ -25,6 +25,7 @@
         android:layout_width="362dp"
         android:layout_height="609dp"
         android:layout_marginTop="70dp"
+        app:cardBackgroundColor="#0F0C0C"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar6">
@@ -63,7 +64,7 @@
                     android:layout_weight="1"
                     android:padding="10dp"
                     android:text="Data"
-                    android:textColor="@color/gray_400" />
+                    android:textColor="@color/black" />
 
                 <TextView
                     android:id="@+id/textView9"
@@ -72,9 +73,8 @@
                     android:layout_weight="1"
                     android:padding="10dp"
                     android:text="Descrição"
-                    android:textColor="@color/gray_400"
-                    app:tint="@color/gray_400"
-                    />
+                    android:textColor="@color/black"
+                    app:tint="@color/gray_400" />
 
                 <TextView
                     android:id="@+id/textView10"
@@ -83,7 +83,7 @@
                     android:layout_weight="1"
                     android:padding="10dp"
                     android:text="Valor"
-                    android:textColor="@color/gray_400" />
+                    android:textColor="@color/black" />
             </LinearLayout>
 
         </RelativeLayout>
@@ -105,5 +105,20 @@
         app:itemIconTint="@color/nav_colors"
         app:itemTextColor="@color/nav_colors"
         app:labelVisibilityMode="labeled"/>
+
+    <com.google.android.material.chip.Chip
+        android:id="@+id/chipCartao"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="11dp"
+        android:layout_marginBottom="11dp"
+        android:text="Cartâo"
+        app:chipBackgroundColor="@color/menuColor"
+        app:layout_constraintBottom_toTopOf="@+id/cardView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar6" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -16,8 +16,6 @@ import com.example.appfinanceiro.utilitiesClass.ViewUtilities;
 
 public class ExtratoActivity extends AddBalanceActivity{
     private ActivityExtratoBinding binding;
-    private final ColorStateList buttonColorDisabled = ColorStateList.valueOf(Color.parseColor("#571895D8"));
-    private final ColorStateList buttonColorEnabled = ColorStateList.valueOf(Color.parseColor("#925FBC"));
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +55,8 @@ public class ExtratoActivity extends AddBalanceActivity{
             if (binding.bottomNavigationEx.getSelectedItemId() != v.getItemId()) {
                 Intent intent = new Intent(ExtratoActivity.this, MainActivity.class);
                 startActivity(intent);
+
+
                 finish();
                 overridePendingTransition(0, 0);
             }

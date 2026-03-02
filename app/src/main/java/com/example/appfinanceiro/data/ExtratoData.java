@@ -1,17 +1,19 @@
 package com.example.appfinanceiro.data;
 
+import java.time.LocalDate;
+
 public class ExtratoData {
-    private final String data;
+    private final LocalDate data;
     private final String descricao;
     private final Integer valor;
 
-    public ExtratoData(String data, String descricao, Integer valor) {
+    public ExtratoData(LocalDate data, String descricao, Integer valor) {
         this.data = data;
         this.descricao = descricao;
         this.valor = valor;
     }
 
-    public String getData() {
+    public LocalDate getData() {
         return data;
     }
 

@@ -1,19 +1,20 @@
 package com.example.appfinanceiro.model;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 
-public class ModelBalance extends FinanceModel {
+public class ModelBalance {
     private final BigDecimal saldo;
     private final String descricao;
     private final String contaDestino;
     private final String status;
     private final String categoria;
-    private final String data;
+    private final LocalDate data;
     private final int mes;
     private final int ano;
 
 
-    public ModelBalance(BigDecimal saldo, String descricao, String contaDestino, String status, String categoria, String data, int mes, int ano) {
+    public ModelBalance(BigDecimal saldo, String descricao, String contaDestino, String status, String categoria, LocalDate data, int mes, int ano) {
         this.saldo = saldo;
         this.descricao = descricao;
         this.contaDestino = contaDestino;
@@ -44,7 +45,7 @@ public class ModelBalance extends FinanceModel {
         return categoria;
     }
 
-    public String getData() {
+    public LocalDate getData() {
         return data;
     }
 

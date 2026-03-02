@@ -1,8 +1,9 @@
 package com.example.appfinanceiro.model;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 
-public class ModelCreditCard extends FinanceModel {
+public class ModelCreditCard  {
     private final BigDecimal valor;
     private final String bankcCard;
     private final int parcelas;
@@ -55,7 +56,8 @@ public class ModelCreditCard extends FinanceModel {
         return ano;
     }
 
-    public String getData(){
-        return dia + "/" + mes + "/" + ano;
+    public LocalDate getData(){
+        String data = String.valueOf(dia+mes+ano);
+        return LocalDate.parse(data);
     }
 }

@@ -1,15 +1,13 @@
 package com.example.appfinanceiro.adapter;
 
-import android.annotation.SuppressLint;
-import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.appfinanceiro.data.AddBalanceData;
+
 import com.example.appfinanceiro.data.AddCreditCard;
 import com.example.appfinanceiro.data.AddDespesasData;
 import com.example.appfinanceiro.data.ExtratoData;
@@ -21,7 +19,6 @@ import com.example.appfinanceiro.service.ServiceBalance;
 import com.example.appfinanceiro.service.ServiceCreditCard;
 import com.example.appfinanceiro.service.ServiceDespesas;
 
-import java.util.Collection;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -34,7 +31,7 @@ public class AdapterExtrato extends RecyclerView.Adapter<AdapterExtrato.extratoV
     ServiceDespesas serviceDespesas = new ServiceDespesas(addDespesasInterface);
     AddCreditCardInterface addCreditCardInterface = new AddCreditCard();
     ServiceCreditCard serviceCreditCard = new ServiceCreditCard(addCreditCardInterface);
-    private ItemExtratoBinding binding;
+
 
     @NonNull
     @Override
@@ -46,7 +43,7 @@ public class AdapterExtrato extends RecyclerView.Adapter<AdapterExtrato.extratoV
     @Override
     public void onBindViewHolder(@NonNull extratoViewHolder holder, int position) {
         ExtratoData extratoData = filtrarListas().get(position);
-        holder.binding.dataId.setText(extratoData.getData());
+        holder.binding.dataId.setText(String.valueOf(extratoData.getData()));
         holder.binding.descricaoId.setText(extratoData.getDescricao());
         holder.binding.saldoId.setText(String.valueOf(extratoData.getValor()));
     }
@@ -74,7 +71,7 @@ public class AdapterExtrato extends RecyclerView.Adapter<AdapterExtrato.extratoV
 
 
     public static class extratoViewHolder extends RecyclerView.ViewHolder {
-        private ItemExtratoBinding binding;
+        private final ItemExtratoBinding binding;
 
         public extratoViewHolder(@NonNull ItemExtratoBinding binding) {
             super(binding.getRoot());

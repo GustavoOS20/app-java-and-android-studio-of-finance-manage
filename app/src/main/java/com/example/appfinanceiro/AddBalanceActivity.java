@@ -3,6 +3,7 @@ package com.example.appfinanceiro;
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,6 +16,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.appfinanceiro.data.AddBalanceData;
 import com.example.appfinanceiro.data.MainData;
 import com.example.appfinanceiro.databinding.ActivityAddBalanceBinding;
+import com.example.appfinanceiro.databinding.ActivityMainBinding;
 import com.example.appfinanceiro.interfaces.AddBalanceInterface;
 import com.example.appfinanceiro.model.ModelBalance;
 import com.example.appfinanceiro.service.ServiceBalance;
@@ -22,10 +24,13 @@ import com.example.appfinanceiro.utilitiesClass.ViewUtilities;
 import com.example.appfinanceiro.verifications.VerificationsAdd;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 
 public class AddBalanceActivity extends AppCompatActivity {
-    private String data;
+    private LocalDate data;
+    private String dataF;
     private int mes;
     private int ano;
     private ActivityAddBalanceBinding binding;
@@ -79,7 +84,7 @@ public class AddBalanceActivity extends AppCompatActivity {
 
     private void confirmAdd() {
         binding.AddSaldoButton.setOnClickListener(view -> {
-            if (VerificationsAdd.verifyinput(binding, data)) {
+            if (VerificationsAdd.verifyinput(binding, dataF)) {
                 String saldo = Objects.requireNonNull(binding.AddSaldoField.getText()).toString();
                 String descricao = Objects.requireNonNull(binding.IdDescricao.getText()).toString();
                 String contaDestino = Objects.requireNonNull(binding.ContaDestinoId.getText()).toString();
@@ -91,6 +96,8 @@ public class AddBalanceActivity extends AppCompatActivity {
                 AddBalanceInterface balanceInterface = new AddBalanceData();
                 ServiceBalance serviceBalance = new ServiceBalance(balanceInterface);
                 serviceBalance.addBalance(ViewUtilities.IdValue(), balanceData);
+                MainData mainData = new MainData();
+                mainData.setSaldoAdd(Integer.parseInt(saldo));
                 Toast.makeText(this, " " + saldo + "/" + descricao + "/" + contaDestino + "/" + status + "/" + categoria + "/" + data, Toast.LENGTH_SHORT).show();
                 setResult(Activity.RESULT_OK);
                 finish();
@@ -105,11 +112,13 @@ public class AddBalanceActivity extends AppCompatActivity {
     }
 
     private void valueCalendar() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy");
         binding.calendarBalance.setOnDateChangeListener((view, year, month, dayOfMonth) -> {
             ano = year;
             mes = month + 1;
-            data = dayOfMonth + "/" + (month + 1) + "/" + year;
-            binding.dataCalendar.setText(data);
+            dataF = dayOfMonth + "/" + (month + 1) + "/" + year;
+            data = LocalDate.parse(dataF, formatter);
+            binding.dataCalendar.setText(dataF);
         });
     }
 }

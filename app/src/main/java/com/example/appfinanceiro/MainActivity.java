@@ -29,8 +29,6 @@ public class MainActivity extends AppCompatActivity{
     MainData mainData = new MainData();
     private ActivityResultLauncher<Intent> cadastroLauncher;
     private ActivityMainBinding binding;
-    private final ColorStateList buttonColorDisabled = ColorStateList.valueOf(Color.parseColor("#571895D8"));
-    private final ColorStateList buttonColorEnabled = ColorStateList.valueOf(Color.parseColor("#925FBC"));
 
 
     @Override
@@ -68,7 +66,6 @@ public class MainActivity extends AppCompatActivity{
         mainData.despesas();
         mainData.balance();
         mainData.creditCard();
-        mainData.setSaldo();
         String despesas = "Despesas: " + mainData.getDespesas();
         String receitas = "Receitas: " + mainData.getReceitas();
         String saldo = "Saldo: " + mainData.getSaldo();
@@ -121,6 +118,7 @@ public class MainActivity extends AppCompatActivity{
             if (binding.bottomNavigation.getSelectedItemId() != v.getItemId()) {
                 Intent intent = new Intent(MainActivity.this, ExtratoActivity.class);
                 cadastroLauncher.launch(intent);
+                finish();
                 overridePendingTransition(0, 0);
             }
             return true;

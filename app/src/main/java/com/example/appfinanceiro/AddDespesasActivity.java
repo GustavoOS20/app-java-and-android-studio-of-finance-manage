@@ -22,6 +22,7 @@ import com.google.android.material.snackbar.Snackbar;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 
 public class AddDespesasActivity extends AppCompatActivity{
@@ -94,11 +95,11 @@ public class AddDespesasActivity extends AppCompatActivity{
 
     private void valueCalendar() {
         binding.calendarDespesas.setOnDateChangeListener((view, year, month, dayOfMonth) -> {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy");
             mes = month + 1;
             ano = year;
-            String dataS = String.valueOf(dayOfMonth+""+(month + 1)+"" + year);
-            data = LocalDate.parse(dataS);
-            dataF = dayOfMonth + "/" + (month + 1) + "/" + year;
+            dataF = dayOfMonth + " / " + (month + 1) + " / " + year;
+            data = LocalDate.parse(dataF, formatter);
             binding.valorCalendar.setText(dataF);
         });
     }

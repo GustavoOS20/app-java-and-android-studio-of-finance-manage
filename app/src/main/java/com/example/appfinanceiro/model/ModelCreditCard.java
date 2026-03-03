@@ -2,6 +2,7 @@ package com.example.appfinanceiro.model;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class ModelCreditCard  {
     private final BigDecimal valor;
@@ -57,7 +58,9 @@ public class ModelCreditCard  {
     }
 
     public LocalDate getData(){
-        String data = String.valueOf(dia+mes+ano);
-        return LocalDate.parse(data);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy");
+
+        String data = dia + "/" + mes + "/" + ano;
+        return LocalDate.parse(data, formatter);
     }
 }

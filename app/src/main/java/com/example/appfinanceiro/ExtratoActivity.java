@@ -46,7 +46,7 @@ public class ExtratoActivity extends AddBalanceActivity{
 
     private void adicionarElementos(){
         binding.recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        binding.recyclerView.setAdapter(new AdapterExtrato());
+        binding.recyclerView.setAdapter(new AdapterExtrato(binding));
     }
 
     private void menuNavegation(){

@@ -98,7 +98,7 @@ public class AddDespesasActivity extends AppCompatActivity{
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy");
             mes = month + 1;
             ano = year;
-            dataF = dayOfMonth + " / " + (month + 1) + " / " + year;
+            dataF = dayOfMonth + "/" + (month + 1) + "/" + year;
             data = LocalDate.parse(dataF, formatter);
             binding.valorCalendar.setText(dataF);
         });

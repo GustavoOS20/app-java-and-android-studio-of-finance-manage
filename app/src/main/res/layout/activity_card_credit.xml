@@ -22,20 +22,22 @@
         android:id="@+id/ValorCartao"
         android:layout_width="280dp"
         android:layout_height="60dp"
+        android:layout_marginTop="76dp"
+        android:layout_marginBottom="10dp"
         android:hint="Valor"
+        android:textColorHint="@color/gray_400"
         app:layout_constraintBottom_toTopOf="@+id/CreditBank"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.924"
-        android:textColorHint="@color/gray_400"/>
+        app:layout_constraintTop_toBottomOf="@+id/toolbar4"
+        app:layout_constraintVertical_bias="1.0" />
 
     <CalendarView
         android:id="@+id/calendarCreditCard"
         android:layout_width="285dp"
         android:layout_height="309dp"
-        android:layout_marginBottom="32dp"
+        android:layout_marginBottom="16dp"
         android:background="@color/white"
         android:theme="@style/Theme.AppCompat.Light"
         app:layout_constraintBottom_toTopOf="@+id/addCardButton"
@@ -56,21 +58,22 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/fabCalendarCard"
-        app:layout_constraintTop_toBottomOf="@+id/categoriaIdCard"
-        app:layout_constraintVertical_bias="0.278" />
+        app:layout_constraintTop_toBottomOf="@+id/spinnerCredit" />
 
     <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/CreditBank"
         android:layout_width="280dp"
         android:layout_height="60dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="149dp"
         android:layout_marginBottom="10dp"
         android:hint="Banco do cartão"
+        android:textColorHint="@color/gray_400"
         app:layout_constraintBottom_toTopOf="@+id/spinner"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
-        android:textColorHint="@color/gray_400" />
+        app:layout_constraintTop_toBottomOf="@+id/toolbar4"
+        app:layout_constraintVertical_bias="0.0" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fabCalendarCard"
@@ -91,47 +94,49 @@
         android:layout_height="65dp"
         android:layout_marginBottom="16dp"
         android:background="@drawable/borda_personalizada"
-        app:backgroundTint="@color/menuColor"
         android:text="Adicionar"
+        app:backgroundTint="@color/menuColor"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/categoriaIdCard"
-        android:layout_width="280dp"
-        android:layout_height="60dp"
-        android:layout_marginTop="332dp"
-        android:hint="Categoria"
-        app:layout_constraintBottom_toTopOf="@+id/addCardButton"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.167"
-        android:textColorHint="@color/gray_400"
-        />
+        app:layout_constraintTop_toBottomOf="@+id/spinnerCredit"
+        app:layout_constraintVertical_bias="0.859" />
 
     <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/idDescricaoCard"
         android:layout_width="280dp"
         android:layout_height="60dp"
-        android:layout_marginBottom="10dp"
+        android:layout_marginTop="260dp"
         android:hint="Descrição"
-        app:layout_constraintBottom_toTopOf="@+id/categoriaIdCard"
+        android:textColorHint="@color/gray_400"
+        app:layout_constraintBottom_toTopOf="@+id/spinnerCredit"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.503"
+        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
-        android:textColorHint="@color/gray_400"/>
+        app:layout_constraintTop_toBottomOf="@+id/toolbar4"
+        app:layout_constraintVertical_bias="0.55" />
 
     <Spinner
         android:id="@+id/spinner"
-        android:layout_width="280dp"
-        android:layout_height="36dp"
+        android:layout_width="282dp"
+        android:layout_height="42dp"
         android:layout_marginBottom="10dp"
         app:layout_constraintBottom_toTopOf="@+id/idDescricaoCard"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar4"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <Spinner
+        android:id="@+id/spinnerCredit"
+        android:layout_width="281dp"
+        android:layout_height="52dp"
+        android:layout_marginTop="340dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.507"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar4" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

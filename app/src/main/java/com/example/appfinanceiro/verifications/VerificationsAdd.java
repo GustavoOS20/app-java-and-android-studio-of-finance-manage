@@ -17,7 +17,6 @@ public class VerificationsAdd {
                 TextUtils.isEmpty(binding.IdDescricao.getText()) ||
                 TextUtils.isEmpty(binding.ContaDestinoId.getText()) ||
                 TextUtils.isEmpty(binding.StatusId.getText()) ||
-                TextUtils.isEmpty(binding.CategoriaId.getText()) ||
                 TextUtils.isEmpty(data) ||
                 data.equalsIgnoreCase("Data")) {
             Snackbar.make(binding.getRoot(), "Preencha todos os campos", Snackbar.LENGTH_SHORT).show();
@@ -30,7 +29,6 @@ public class VerificationsAdd {
         boolean noVerified = false;
         if(TextUtils.isEmpty(binding.addValorField.getText()) ||
                 TextUtils.isEmpty(binding.contaOrigemId.getText())
-                || TextUtils.isEmpty(binding.categoriaIdDes.getText())
                 || TextUtils.isEmpty(binding.idDescricaoDes.getText())
                 || TextUtils.isEmpty(data)
                 || data.equalsIgnoreCase("Data")) {
@@ -43,7 +41,6 @@ public class VerificationsAdd {
     public static boolean verifyAddCard(ActivityCardCreditBinding binding, String data, Spinner spinner){
         boolean noVerified = false;
         if(TextUtils.isEmpty(binding.CreditBank.getText()) ||
-                TextUtils.isEmpty(binding.categoriaIdCard.getText()) ||
                 TextUtils.isEmpty(binding.idDescricaoCard.getText()) ||
                 TextUtils.isEmpty(binding.ValorCartao.getText()) ||
                 TextUtils.isEmpty(data) ||

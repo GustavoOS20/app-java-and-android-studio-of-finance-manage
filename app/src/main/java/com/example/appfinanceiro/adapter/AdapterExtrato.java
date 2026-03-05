@@ -34,6 +34,7 @@ public class AdapterExtrato extends RecyclerView.Adapter<AdapterExtrato.extratoV
         holder.binding.dataId.setText(String.valueOf(extratoData.getData()));
         holder.binding.descricaoId.setText(extratoData.getDescricao());
         holder.binding.saldoId.setText(String.valueOf(extratoData.getValor()));
+        holder.binding.categoriasId.setText(extratoData.getCategoria());
     }
 
     @Override

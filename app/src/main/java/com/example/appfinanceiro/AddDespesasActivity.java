@@ -10,10 +10,12 @@ import android.view.MenuItem;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.appfinanceiro.adapter.AdapterSpinnerAddAndRemove;
 import com.example.appfinanceiro.data.AddDespesasData;
 import com.example.appfinanceiro.data.MainData;
 import com.example.appfinanceiro.databinding.ActivityAddDespesasBinding;
 import com.example.appfinanceiro.interfaces.AddDespesasInterface;
+import com.example.appfinanceiro.model.Categorias;
 import com.example.appfinanceiro.model.ModelExpense;
 import com.example.appfinanceiro.service.ServiceDespesas;
 import com.example.appfinanceiro.utilitiesClass.ViewUtilities;
@@ -48,12 +50,15 @@ public class AddDespesasActivity extends AppCompatActivity{
     }
 
     private void confirmAdd() {
+        AdapterSpinnerAddAndRemove adapterSpinnerAddAndRemove = new AdapterSpinnerAddAndRemove(this, Categorias.getCategoriasDespesas());
+        binding.spinnerDepespesas.setAdapter(adapterSpinnerAddAndRemove);
         binding.addSaldoButton.setOnClickListener(view -> {
+
             if (VerificationsAdd.verifyAddDespesas(binding, dataF)) {
                 String valor = Objects.requireNonNull(binding.addValorField.getText()).toString();
                 String descricao = Objects.requireNonNull(binding.idDescricaoDes.getText()).toString();
                 String contaOrigem = Objects.requireNonNull(binding.contaOrigemId.getText()).toString();
-                String categoria = Objects.requireNonNull(binding.categoriaIdDes.getText()).toString();
+                String categoria = (String) binding.spinnerDepespesas.getSelectedItem();
 
                 BigDecimal valorBigDecimal = new BigDecimal(valor);
                 ModelExpense despesasData = new ModelExpense(valorBigDecimal, descricao, data, contaOrigem, categoria , mes, ano);

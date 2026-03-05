@@ -10,9 +10,11 @@ import android.view.MenuItem;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.appfinanceiro.adapter.AdapterSpinner;
+import com.example.appfinanceiro.adapter.AdapterSpinnerAddAndRemove;
 import com.example.appfinanceiro.data.AddCreditCard;
 import com.example.appfinanceiro.databinding.ActivityCardCreditBinding;
 import com.example.appfinanceiro.interfaces.AddCreditCardInterface;
+import com.example.appfinanceiro.model.Categorias;
 import com.example.appfinanceiro.model.ModelCreditCard;
 import com.example.appfinanceiro.model.Parcela;
 import com.example.appfinanceiro.service.ServiceCreditCard;
@@ -56,13 +58,15 @@ public class AddCreditCardActivity extends AppCompatActivity {
         if(serviceCreditCard.getListaDeParcelas().isEmpty()){
             serviceCreditCard.criarParcela();
         }
+        AdapterSpinnerAddAndRemove adapterSpinnerAddAndRemove = new AdapterSpinnerAddAndRemove(this, Categorias.getCategoriasDespesas());
+        binding.spinnerCredit.setAdapter(adapterSpinnerAddAndRemove);
         AdapterSpinner adapterSpinner = new AdapterSpinner(this, serviceCreditCard.getListaDeParcelas());
         binding.spinner.setAdapter(adapterSpinner);
         binding.addCardButton.setOnClickListener(v -> {
             if(VerificationsAdd.verifyAddCard(binding, data, binding.spinner)){
                 String valor = Objects.requireNonNull(binding.ValorCartao.getText()).toString();
                 String descricao = Objects.requireNonNull(binding.idDescricaoCard.getText()).toString();
-                String categoria = Objects.requireNonNull(binding.categoriaIdCard.getText()).toString();
+                String categoria = (String) binding.spinnerCredit.getSelectedItem();
                 String banco = Objects.requireNonNull(binding.CreditBank.getText()).toString();
                 Parcela parcela = (Parcela) binding.spinner.getSelectedItem();
 

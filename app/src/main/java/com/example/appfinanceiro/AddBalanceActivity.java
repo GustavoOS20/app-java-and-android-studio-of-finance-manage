@@ -13,11 +13,13 @@ import android.widget.Toast;
 import androidx.activity.OnBackPressedCallback;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.appfinanceiro.adapter.AdapterSpinnerAddAndRemove;
 import com.example.appfinanceiro.data.AddBalanceData;
 import com.example.appfinanceiro.data.MainData;
 import com.example.appfinanceiro.databinding.ActivityAddBalanceBinding;
 import com.example.appfinanceiro.databinding.ActivityMainBinding;
 import com.example.appfinanceiro.interfaces.AddBalanceInterface;
+import com.example.appfinanceiro.model.Categorias;
 import com.example.appfinanceiro.model.ModelBalance;
 import com.example.appfinanceiro.service.ServiceBalance;
 import com.example.appfinanceiro.utilitiesClass.ViewUtilities;
@@ -83,13 +85,15 @@ public class AddBalanceActivity extends AppCompatActivity {
     }
 
     private void confirmAdd() {
+        AdapterSpinnerAddAndRemove adapterSpinnerAddAndRemove = new AdapterSpinnerAddAndRemove(this, Categorias.getCategoriasBalance());
+        binding.spinnerBalance.setAdapter(adapterSpinnerAddAndRemove);
         binding.AddSaldoButton.setOnClickListener(view -> {
             if (VerificationsAdd.verifyinput(binding, dataF)) {
                 String saldo = Objects.requireNonNull(binding.AddSaldoField.getText()).toString();
                 String descricao = Objects.requireNonNull(binding.IdDescricao.getText()).toString();
                 String contaDestino = Objects.requireNonNull(binding.ContaDestinoId.getText()).toString();
                 String status = Objects.requireNonNull(binding.StatusId.getText()).toString();
-                String categoria = Objects.requireNonNull(binding.CategoriaId.getText()).toString();
+                String categoria = (String) binding.spinnerBalance.getSelectedItem();
 
                 BigDecimal bigDecimal = new BigDecimal(saldo);
                 ModelBalance balanceData = new ModelBalance(bigDecimal, descricao, contaDestino, status, categoria, data, mes, ano);

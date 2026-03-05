@@ -3,6 +3,7 @@ package com.example.appfinanceiro;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
+import android.widget.SearchView;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 
@@ -54,6 +55,18 @@ public class ExtratoActivity extends AddBalanceActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_item, menu);
+        SearchView searchView = (SearchView) menu.findItem(R.id.action_search).getActionView();
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+        });
         return true;
     }
 
@@ -87,10 +100,10 @@ public class ExtratoActivity extends AddBalanceActivity {
 
     private List<ExtratoData> filtrarListasAlls() {
         Stream<ExtratoData> balanceStream = serviceBalance.getBalances().values().stream()
-                .map(b -> new ExtratoData(b.getData(), b.getDescricao(), b.getSaldo().intValue()));
+                .map(b -> new ExtratoData(b.getData(), b.getDescricao(), b.getSaldo().intValue(), b.getCategoria()));
 
         Stream<ExtratoData> expenseStream = serviceDespesas.getDespesas().values().stream()
-                .map(e -> new ExtratoData(e.getData(), e.getDescricao(), e.getValor().negate().intValue()));
+                .map(e -> new ExtratoData(e.getData(), e.getDescricao(), e.getValor().negate().intValue(), e.getCategoria()));
 
 
         return Stream.of(balanceStream, expenseStream)
@@ -101,7 +114,7 @@ public class ExtratoActivity extends AddBalanceActivity {
 
     private List<ExtratoData> filtrarListasCredit() {
         return serviceCreditCard.getCreditCards().values().stream()
-                .map(c -> new ExtratoData(c.getData(), c.getDescricao(), c.getValor().intValue()))
+                .map(c -> new ExtratoData(c.getData(), c.getDescricao(), c.getValor().intValue(), c.getCategoria()))
                 .sorted(Comparator.comparing(ExtratoData::getData).reversed())
                 .collect(Collectors.toList());
     }

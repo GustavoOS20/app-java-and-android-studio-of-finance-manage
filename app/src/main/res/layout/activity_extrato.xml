@@ -77,8 +77,18 @@
                     app:tint="@color/gray_400" />
 
                 <TextView
+                    android:id="@+id/textView"
+                    android:layout_width="144dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:padding="10dp"
+                    android:text="Categorias"
+                    android:textColor="@color/black"
+                    app:tint="@color/gray_400"/>
+
+                <TextView
                     android:id="@+id/textView10"
-                    android:layout_width="122dp"
+                    android:layout_width="109dp"
                     android:layout_height="58dp"
                     android:layout_weight="1"
                     android:padding="10dp"

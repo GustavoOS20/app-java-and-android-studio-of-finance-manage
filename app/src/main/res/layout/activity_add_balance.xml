@@ -52,11 +52,11 @@
         android:layout_height="60dp"
         android:layout_marginTop="280dp"
         android:hint="Conta de Destino"
+        android:textColorHint="@color/gray_400"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:textColorHint="@color/gray_400"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/StatusId"
@@ -64,23 +64,11 @@
         android:layout_height="60dp"
         android:layout_marginTop="416dp"
         android:hint="Status"
+        android:textColorHint="@color/gray_400"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:textColorHint="@color/gray_400"/>
-
-    <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/CategoriaId"
-        android:layout_width="280dp"
-        android:layout_height="60dp"
-        android:layout_marginTop="8dp"
-        android:hint="Categoria"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ContaDestinoId"
-        android:textColorHint="@color/gray_400"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/AddSaldoButton"
@@ -132,4 +120,15 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/fabCalendarBalance"
         app:layout_constraintTop_toBottomOf="@+id/StatusId" />
+
+    <Spinner
+        android:id="@+id/spinnerBalance"
+        android:layout_width="281dp"
+        android:layout_height="58dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginBottom="27dp"
+        app:layout_constraintBottom_toTopOf="@+id/StatusId"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ContaDestinoId" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -12,7 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppFinanceiro">
         <activity
-            android:name=".MainActivity"
+            android:name=".logicAndUi.adapter.activity.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -21,19 +21,19 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".AddBalanceActivity">
+            android:name=".logicAndUi.adapter.activity.AddBalanceActivity">
         </activity>
 
         <activity
-            android:name=".AddDespesasActivity">
+            android:name=".logicAndUi.adapter.activity.AddDespesasActivity">
         </activity>
 
         <activity
-            android:name=".AddCreditCardActivity">
+            android:name=".logicAndUi.adapter.activity.AddCreditCardActivity">
         </activity>
 
         <activity
-            android:name=".ExtratoActivity">
+            android:name=".logicAndUi.adapter.activity.ExtratoActivity">
         </activity>
 
     </application>

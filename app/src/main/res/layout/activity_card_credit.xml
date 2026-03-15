@@ -23,15 +23,13 @@
         android:layout_width="280dp"
         android:layout_height="60dp"
         android:layout_marginTop="76dp"
-        android:layout_marginBottom="10dp"
         android:hint="Valor"
         android:textColorHint="@color/gray_400"
-        app:layout_constraintBottom_toTopOf="@+id/CreditBank"
+        app:layout_constraintBottom_toTopOf="@+id/spinnerCreditBanco"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar4"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintTop_toBottomOf="@+id/toolbar4" />
 
     <CalendarView
         android:id="@+id/calendarCreditCard"
@@ -60,20 +58,18 @@
         app:layout_constraintStart_toEndOf="@+id/fabCalendarCard"
         app:layout_constraintTop_toBottomOf="@+id/spinnerCredit" />
 
-    <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/CreditBank"
-        android:layout_width="280dp"
-        android:layout_height="60dp"
-        android:layout_marginTop="149dp"
-        android:layout_marginBottom="10dp"
-        android:hint="Banco do cartão"
-        android:textColorHint="@color/gray_400"
+    <Spinner
+        android:id="@+id/spinnerCreditBanco"
+        android:layout_width="281dp"
+        android:layout_height="52dp"
+        android:layout_marginTop="156dp"
+        android:layout_marginBottom="11dp"
         app:layout_constraintBottom_toTopOf="@+id/spinner"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintHorizontal_bias="0.492"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar4"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="1.0" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fabCalendarCard"

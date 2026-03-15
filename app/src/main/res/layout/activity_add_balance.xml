@@ -38,37 +38,13 @@
         android:layout_height="60dp"
         android:layout_marginTop="104dp"
         android:hint="Descrição"
-        app:layout_constraintBottom_toTopOf="@+id/ContaDestinoId"
+        android:textColorHint="@color/gray_400"
+        app:layout_constraintBottom_toTopOf="@+id/spinnerContaBanco"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.921"
-        android:textColorHint="@color/gray_400"/>
-
-    <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/ContaDestinoId"
-        android:layout_width="280dp"
-        android:layout_height="60dp"
-        android:layout_marginTop="280dp"
-        android:hint="Conta de Destino"
-        android:textColorHint="@color/gray_400"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/StatusId"
-        android:layout_width="280dp"
-        android:layout_height="60dp"
-        android:layout_marginTop="416dp"
-        android:hint="Status"
-        android:textColorHint="@color/gray_400"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintVertical_bias="0.924" />
 
     <Button
         android:id="@+id/AddSaldoButton"
@@ -82,20 +58,19 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/StatusId"
-        app:layout_constraintVertical_bias="0.841" />
+        app:layout_constraintTop_toBottomOf="@+id/spinnerStatus"
+        app:layout_constraintVertical_bias="0.662" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fabCalendarBalance"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="40dp"
         android:clickable="true"
         app:layout_constraintBottom_toTopOf="@+id/AddSaldoButton"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.078"
+        app:layout_constraintHorizontal_bias="0.107"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/StatusId"
-        app:layout_constraintVertical_bias="0.656"
         app:srcCompat="?attr/popupMenuBackground" />
 
     <CalendarView
@@ -107,28 +82,48 @@
         app:layout_constraintBottom_toTopOf="@+id/AddSaldoButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/fabCalendarBalance"
-        app:layout_constraintTop_toBottomOf="@+id/ContaDestinoId"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintStart_toEndOf="@+id/fabCalendarBalance" />
 
     <TextView
         android:id="@+id/dataCalendar"
         android:layout_width="233dp"
         android:layout_height="46dp"
+        android:layout_marginBottom="80dp"
         android:text="Data"
         app:layout_constraintBottom_toTopOf="@+id/AddSaldoButton"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/fabCalendarBalance"
-        app:layout_constraintTop_toBottomOf="@+id/StatusId" />
+        app:layout_constraintHorizontal_bias="0.617"
+        app:layout_constraintStart_toEndOf="@+id/fabCalendarBalance" />
 
     <Spinner
         android:id="@+id/spinnerBalance"
         android:layout_width="281dp"
         android:layout_height="58dp"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spinnerContaBanco" />
+
+    <Spinner
+        android:id="@+id/spinnerStatus"
+        android:layout_width="281dp"
+        android:layout_height="58dp"
+        android:layout_marginTop="344dp"
         android:layout_marginBottom="27dp"
         app:layout_constraintBottom_toTopOf="@+id/StatusId"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ContaDestinoId" />
+        app:layout_constraintTop_toBottomOf="@+id/toolbar2" />
+
+    <Spinner
+        android:id="@+id/spinnerContaBanco"
+        android:layout_width="281dp"
+        android:layout_height="58dp"
+        android:layout_marginTop="212dp"
+        android:layout_marginBottom="27dp"
+        app:layout_constraintBottom_toTopOf="@+id/StatusId"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar2" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

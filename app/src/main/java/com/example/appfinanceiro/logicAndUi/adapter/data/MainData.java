@@ -1,5 +1,9 @@
 package com.example.appfinanceiro.logicAndUi.adapter.data;
 
+import com.example.appfinanceiro.database.DAO.BalanceDao;
+import com.example.appfinanceiro.database.DAO.CreditCardDao;
+import com.example.appfinanceiro.database.DAO.DespesasDao;
+import com.example.appfinanceiro.database.FinanceDatabase;
 import com.example.appfinanceiro.logicAndUi.adapter.adapter.AdapterDataMainMes;
 import com.example.appfinanceiro.logicAndUi.adapter.adapter.AdapterDataMainYear;
 import com.example.appfinanceiro.databinding.ActivityMainBinding;
@@ -13,8 +17,10 @@ import com.example.appfinanceiro.logicAndUi.adapter.service.ServiceCreditCard;
 import com.example.appfinanceiro.logicAndUi.adapter.service.ServiceDespesas;
 
 import java.util.Calendar;
+import java.util.List;
 
 public class MainData {
+    private ActivityMainBinding binding;
     private final Calendar calendar = Calendar.getInstance();
     private final AddCreditCardInterface addCreditCardInterface = new AddCreditCard();
     private final ServiceCreditCard serviceCreditCard = new ServiceCreditCard(addCreditCardInterface);
@@ -63,28 +69,28 @@ public class MainData {
 
     public void despesas() {
         dataPresente();
-        int despesasFor = serviceDespesas.getDespesas().values().stream()
-                .filter(expense -> expense.getMes() == mes && expense.getAno() == ano).
-                mapToInt(expense -> expense.getValor().intValue()).
-                sum();
-        despesas += despesasFor;
+        FinanceDatabase db = FinanceDatabase.getDatabase(binding.getRoot().getContext());
+        DespesasDao despesasDao = db.despesasDao();
+        List<Integer> despesas = despesasDao.getDespesasPorData(mes, ano);
+        int despesasFor = despesas.stream().mapToInt(Integer::intValue).sum();
+        this.despesas += despesasFor;
    }
 
    public void balance(){
        dataPresente();
-       int balance = serviceBalance.getBalances().values().stream()
-               .filter(balance1 -> balance1.getMes() == mes && balance1.getAno() == ano)
-               .mapToInt(balance1 -> balance1.getSaldo().intValue()).
-               sum();
+       FinanceDatabase db = FinanceDatabase.getDatabase(binding.getRoot().getContext());
+       BalanceDao balanceDao = db.balanceDao();
+       List<Integer> balanceD = balanceDao.getBalancePorData(mes, ano);
+       int balance = balanceD.stream().mapToInt(Integer::intValue).sum();
        receitas += balance;
     }
 
     public void creditCard(){
         dataPresente();
-        double cartao = serviceCreditCard.getCreditCards().values().stream()
-                .filter(creditCard -> creditCard.getMes() == mes && creditCard.getAno() == ano).
-                mapToDouble(creditCard -> creditCard.getValor().doubleValue()).
-                sum();
+        FinanceDatabase db = FinanceDatabase.getDatabase(binding.getRoot().getContext());
+        CreditCardDao creditCardDao = db.creditDao();
+        List<Integer> creditCard = creditCardDao.getCreditPorData(mes, ano);
+        double cartao = creditCard.stream().mapToDouble(Integer::doubleValue).sum();
         saldoCartao += cartao;
     }
 
@@ -94,6 +100,14 @@ public class MainData {
     }
 
     public void changeDate(ActivityMainBinding binding, Object mesS, Object anoS) {
+        FinanceDatabase db = FinanceDatabase.getDatabase(binding.getRoot().getContext());
+        BalanceDao balanceDao = db.balanceDao();
+        DespesasDao despesasDao = db.despesasDao();
+        CreditCardDao creditCardDao = db.creditDao();
+        List<Integer> despesasList = despesasDao.getDespesasPorData(mes, ano);
+        List<Integer> balanceList = balanceDao.getBalancePorData(mes, ano);
+        List<Integer> creditCardList = creditCardDao.getCreditPorData(mes, ano);
+
         if (anoS == null || mesS == null) {
             return;
         }
@@ -111,15 +125,15 @@ public class MainData {
         receitas = 0;
         saldoCartao = 0;
 
-        int despesas = serviceDespesas.getDespesas().values().stream().filter(expense -> expense.getMes() == mesFor && expense.getAno() == anoFor).mapToInt(expense -> expense.getValor().intValue()).sum();
+        int despesas = despesasList.stream().mapToInt(Integer::intValue).sum();
         String despesasFormat = "Despesas: " + despesas;
         binding.DespesasId.setText(despesasFormat);
 
-        int balance = serviceBalance.getBalances().values().stream().filter(balance1 -> balance1.getMes() == mesFor && balance1.getAno() == anoFor).mapToInt(balance1 -> balance1.getSaldo().intValue()).sum();
+        int balance = balanceList.stream().mapToInt(Integer::intValue).sum();
         String balanceFormat = "Receita: " + balance;
         binding.receitasId.setText(balanceFormat);
 
-        double cartao = serviceCreditCard.getCreditCards().values().stream().filter(creditCard -> creditCard.getMes() == mesFor && creditCard.getAno() == anoFor).mapToDouble(creditCard -> creditCard.getValor().doubleValue()).sum();
+        double cartao = creditCardList.stream().mapToDouble(Integer::doubleValue).sum();
         String cartaoFormat = "Saldo Cartão: " + cartao;
         binding.saldoCartO.setText(cartaoFormat);
     }

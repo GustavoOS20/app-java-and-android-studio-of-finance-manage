@@ -5,6 +5,9 @@ import androidx.room.Entity;
 import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
 
+import java.math.BigDecimal;
+import java.time.LocalDate;
+
 @Entity(
         tableName = "transacoesCartoes",
         foreignKeys = {
@@ -15,7 +18,8 @@ import androidx.room.PrimaryKey;
 public class TransacoesDbCartao {
     @PrimaryKey(autoGenerate = true)
     public int id;
-    public double valor;
+    public BigDecimal valor;
+    public LocalDate data;
     @ColumnInfo (name = "categoria_id")
     public int categoriaId;
     @ColumnInfo (name = "cartao_id")

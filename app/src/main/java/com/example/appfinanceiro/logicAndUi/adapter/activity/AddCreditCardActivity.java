@@ -9,8 +9,12 @@ import android.view.MenuItem;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.appfinanceiro.database.DAO.BalanceDao;
 import com.example.appfinanceiro.database.DAO.CategoriasDao;
+import com.example.appfinanceiro.database.DAO.CreditCardDao;
 import com.example.appfinanceiro.database.Entity.CategoriasDb;
+import com.example.appfinanceiro.database.Entity.TransacoesDbBalance;
+import com.example.appfinanceiro.database.Entity.TransacoesDbCartao;
 import com.example.appfinanceiro.database.FinanceDatabase;
 import com.example.appfinanceiro.logicAndUi.adapter.adapter.AdapterSpinner;
 import com.example.appfinanceiro.logicAndUi.adapter.adapter.AdapterSpinnerAddAndRemove;
@@ -26,12 +30,14 @@ import com.example.appfinanceiro.logicAndUi.adapter.verifications.VerificationsA
 import com.google.android.material.snackbar.Snackbar;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class AddCreditCardActivity extends AppCompatActivity {
-    private String data;
+    private LocalDate data;
     private String dia;
     private String mes;
     private String ano;
@@ -39,6 +45,7 @@ public class AddCreditCardActivity extends AppCompatActivity {
     private int diaInt;
     private int mesInt;
     private int anoInt;
+    private String dataF;
     private ActivityCardCreditBinding binding;
 
     @Override
@@ -72,17 +79,16 @@ public class AddCreditCardActivity extends AppCompatActivity {
         AdapterSpinner adapterSpinner = new AdapterSpinner(this, serviceCreditCard.getListaDeParcelas());
         binding.spinner.setAdapter(adapterSpinner);
         binding.addCardButton.setOnClickListener(v -> {
-            if(VerificationsAdd.verifyAddCard(binding, data, binding.spinner)){
+            if(VerificationsAdd.verifyAddCard(binding, dataF, binding.spinner)){
                 String valor = Objects.requireNonNull(binding.ValorCartao.getText()).toString();
                 String descricao = Objects.requireNonNull(binding.idDescricaoCard.getText()).toString();
                 String categoria = (String) binding.spinnerCredit.getSelectedItem();
                 String banco = (String) binding.spinnerCreditBanco.getSelectedItem();
                 Parcela parcela = (Parcela) binding.spinner.getSelectedItem();
-
                 formatarValores(valor);
-
-                ModelCreditCard modelCreditCard = new ModelCreditCard(bDValor, banco, parcela.getNumero(), descricao, categoria, diaInt, mesInt, anoInt);
-                serviceCreditCard.addCreditCard(ViewUtilities.IdValue(), modelCreditCard);
+                //ModelCreditCard modelCreditCard = new ModelCreditCard(bDValor, banco, parcela.getNumero(), descricao, categoria, diaInt, mesInt, anoInt);
+               //serviceCreditCard.addCreditCard(ViewUtilities.IdValue(), modelCreditCard);
+                saveDbcredit(bDValor, descricao, parcela.getNumero(), categoria, banco);
                 Snackbar.make(binding.getRoot(), "Valor: " + valor + " /" + "Descrição: " + descricao + " /" + "Categoria: " + categoria + " /" + "Banco: " + banco + " /" + "Parcelas: " + parcela.getNumero(), Snackbar.LENGTH_SHORT).show();
                 setResult(RESULT_OK);
                 finish();
@@ -119,11 +125,13 @@ public class AddCreditCardActivity extends AppCompatActivity {
 
     private void valueCalendar() {
         binding.calendarCreditCard.setOnDateChangeListener((view, year, month, dayOfMonth) -> {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy");
             dia = String.valueOf(dayOfMonth);
             mes = String.valueOf(month + 1);
             ano = String.valueOf(year);
-            data = dayOfMonth + "/" + (month + 1) + "/" + year;
-            binding.valorCalendarCard.setText(data);
+            dataF = dayOfMonth + "/" + (month + 1) + "/" + year;
+            data = LocalDate.parse(dataF, formatter);
+            binding.valorCalendarCard.setText(dataF);
         });
     }
 
@@ -153,6 +161,24 @@ public class AddCreditCardActivity extends AppCompatActivity {
                 binding.spinnerCredit.setAdapter(categorias);
             });
         }).start();
-
         }
+
+    private void saveDbcredit(BigDecimal saldo, String descricao, int parcelas, String categoria, String banco){
+        TransacoesDbCartao transacoesDbCredit = new TransacoesDbCartao();
+        transacoesDbCredit.valor = saldo;
+        transacoesDbCredit.descricao = descricao;
+        transacoesDbCredit.parcelas = parcelas;
+        transacoesDbCredit.dia = diaInt;
+        transacoesDbCredit.mes = mesInt;
+        transacoesDbCredit.ano = anoInt;
+        transacoesDbCredit.data = data;
+        FinanceDatabase.databaseWriteExecutor.execute(() -> {
+            FinanceDatabase db = FinanceDatabase.getDatabase(this);
+            CategoriasDao categoriasDao = db.categoriasDao();
+            CreditCardDao creditCardDao = db.creditDao();
+            transacoesDbCredit.categoriaId = categoriasDao.getId(categoria);
+            transacoesDbCredit.cartaoId = categoriasDao.getId(banco);
+            creditCardDao.insert(transacoesDbCredit);
+        });
+    }
     }

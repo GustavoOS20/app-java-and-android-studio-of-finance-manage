@@ -9,8 +9,12 @@ import android.view.MenuItem;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.appfinanceiro.database.DAO.BalanceDao;
 import com.example.appfinanceiro.database.DAO.CategoriasDao;
+import com.example.appfinanceiro.database.DAO.DespesasDao;
 import com.example.appfinanceiro.database.Entity.CategoriasDb;
+import com.example.appfinanceiro.database.Entity.TransacoesDbBalance;
+import com.example.appfinanceiro.database.Entity.TransacoesDbDespesas;
 import com.example.appfinanceiro.database.FinanceDatabase;
 import com.example.appfinanceiro.logicAndUi.adapter.adapter.AdapterSpinnerAddAndRemove;
 import com.example.appfinanceiro.logicAndUi.adapter.data.AddDespesasData;
@@ -55,25 +59,26 @@ public class AddDespesasActivity extends AppCompatActivity{
 
     private void confirmAdd() {
         for(String categoria : Categorias.getCategoriasBanco()) {
-            saveDatabase(categoria, "Banco");
+            saveDatabaseCategorias(categoria, "Banco");
         }
         for (String categoria : Categorias.getCategoriasDespesas()) {
-            saveDatabase(categoria, "Despesa");
+            saveDatabaseCategorias(categoria, "Despesa");
         }
         binding.addSaldoButton.setOnClickListener(view -> {
 
             if (VerificationsAdd.verifyAddDespesas(binding, dataF)) {
+                AddDespesasInterface addDespesasInterface = new AddDespesasData();
+                ServiceDespesas serviceDespesas = new ServiceDespesas(addDespesasInterface);
                 String valor = Objects.requireNonNull(binding.addValorField.getText()).toString();
                 String descricao = Objects.requireNonNull(binding.idDescricaoDes.getText()).toString();
                 String contaOrigem = (String) binding.spinnerDepespesasBanco.getSelectedItem();
                 String categoria = (String) binding.spinnerDepespesas.getSelectedItem();
 
                 BigDecimal valorBigDecimal = new BigDecimal(valor);
-                ModelExpense despesasData = new ModelExpense(valorBigDecimal, descricao, data, contaOrigem, categoria , mes, ano);
-                AddDespesasInterface addDespesasInterface = new AddDespesasData();
-                ServiceDespesas serviceDespesas = new ServiceDespesas(addDespesasInterface);
+                //ModelExpense despesasData = new ModelExpense(valorBigDecimal, descricao, data, contaOrigem, categoria , mes, ano);
+                saveDbDespesas(valorBigDecimal, descricao, categoria, contaOrigem);
                 Snackbar.make(binding.getRoot(), "Valor" + valor + " /" + "Descrição" + descricao + " /" + "Conta Origem" + contaOrigem + " /" + "Categoria" + categoria, Snackbar.LENGTH_SHORT).show();
-                serviceDespesas.addDespesas(ViewUtilities.IdValue(), despesasData);
+                //serviceDespesas.addDespesas(ViewUtilities.IdValue(), despesasData);
                 MainData mainData = new MainData();
                 mainData.setSaldoRemove(Integer.parseInt(valor));
                 setResult(Activity.RESULT_OK);
@@ -117,7 +122,7 @@ public class AddDespesasActivity extends AppCompatActivity{
         });
     }
 
-    public void saveDatabase(String categoria, String tipo){
+    public void saveDatabaseCategorias(String categoria, String tipo){
         CategoriasDb categoriasDb = new CategoriasDb();
         categoriasDb.nome = categoria;
         categoriasDb.tipo = tipo;
@@ -136,6 +141,22 @@ public class AddDespesasActivity extends AppCompatActivity{
                 binding.spinnerDepespesas.setAdapter(categorias);
             });
         }).start();
+    }
 
+    private void saveDbDespesas(BigDecimal saldo, String descricao, String categoria, String banco){
+        TransacoesDbDespesas transacoesDbDespesas = new TransacoesDbDespesas();
+        transacoesDbDespesas.valor = saldo;
+        transacoesDbDespesas.descricao = descricao;
+        transacoesDbDespesas.data = data;
+        transacoesDbDespesas.mes = mes;
+        transacoesDbDespesas.ano = ano;
+        FinanceDatabase.databaseWriteExecutor.execute(() -> {
+            FinanceDatabase db = FinanceDatabase.getDatabase(this);
+            CategoriasDao categoriasDao = db.categoriasDao();
+            DespesasDao despesasDao = db.despesasDao();
+            transacoesDbDespesas.categoriaId = categoriasDao.getId(categoria);
+            transacoesDbDespesas.contaOrigem = categoriasDao.getId(banco);
+            despesasDao.insert(transacoesDbDespesas);
+        });
     }
 }

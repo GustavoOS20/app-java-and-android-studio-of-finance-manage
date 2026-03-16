@@ -21,6 +21,10 @@ public class AdapterExtrato extends RecyclerView.Adapter<AdapterExtrato.extratoV
         notifyDataSetChanged();
     }
 
+    public List<ExtratoData> getList() {
+        return this.listExibicao;
+    }
+
     @NonNull
     @Override
     public extratoViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {

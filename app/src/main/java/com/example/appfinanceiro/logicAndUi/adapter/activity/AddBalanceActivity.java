@@ -12,6 +12,7 @@ import android.widget.Toast;
 import androidx.activity.OnBackPressedCallback;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.appfinanceiro.database.DAO.BalanceDao;
 import com.example.appfinanceiro.database.DAO.CategoriasDao;
 import com.example.appfinanceiro.database.Entity.CategoriasDb;
 import com.example.appfinanceiro.database.Entity.TransacoesDbBalance;
@@ -89,18 +90,13 @@ public class AddBalanceActivity extends AppCompatActivity {
     }
 
     private void confirmAdd() {
-        List<String> statuss = List.of("À vista", "À pagar");
-        AdapterSpinnerAddAndRemove adapterAdd = new AdapterSpinnerAddAndRemove(this, statuss);
-        for(String categoria : Categorias.getCategoriasBanco()) {
-            saveDatabase(categoria, "Banco");
-        }
-        for (String categoria : Categorias.getCategoriasBalance()) {
-            saveDatabase(categoria, "Balance");
-        }
-        binding.spinnerStatus.setAdapter(adapterAdd);
+        adapterAdd();
 
         binding.AddSaldoButton.setOnClickListener(view -> {
             if (VerificationsAdd.verifyinput(binding, dataF)) {
+                MainData mainData = new MainData();
+                AddBalanceInterface balanceInterface = new AddBalanceData();
+                //ServiceBalance serviceBalance = new ServiceBalance(balanceInterface);
                 String saldo = Objects.requireNonNull(binding.AddSaldoField.getText()).toString();
                 String descricao = Objects.requireNonNull(binding.IdDescricao.getText()).toString();
                 String contaDestino = (String) binding.spinnerContaBanco.getSelectedItem();
@@ -108,13 +104,9 @@ public class AddBalanceActivity extends AppCompatActivity {
                 String categoria = (String) binding.spinnerBalance.getSelectedItem();
 
                 BigDecimal bigDecimal = new BigDecimal(saldo);
-                TransacoesDbBalance transacoesDbBalance = new TransacoesDbBalance();
-
-                ModelBalance balanceData = new ModelBalance(bigDecimal, descricao, contaDestino, status, categoria, data, mes, ano);
-                AddBalanceInterface balanceInterface = new AddBalanceData();
-                ServiceBalance serviceBalance = new ServiceBalance(balanceInterface);
-                serviceBalance.addBalance(ViewUtilities.IdValue(), balanceData);
-                MainData mainData = new MainData();
+                //ModelBalance balanceData = new ModelBalance(bigDecimal, descricao, contaDestino, status, categoria, data, mes, ano);
+                //serviceBalance.addBalance(ViewUtilities.IdValue(), balanceData);
+                saveDbBalance(bigDecimal, descricao, status, categoria, contaDestino);
                 mainData.setSaldoAdd(Integer.parseInt(saldo));
                 Toast.makeText(this, " " + saldo + "/" + descricao + "/" + contaDestino + "/" + status + "/" + categoria + "/" + data, Toast.LENGTH_SHORT).show();
                 setResult(Activity.RESULT_OK);
@@ -140,7 +132,19 @@ public class AddBalanceActivity extends AppCompatActivity {
         });
     }
 
-    public void saveDatabase(String categoria, String tipo){
+    private void adapterAdd(){
+        List<String> statuss = List.of("À vista", "À pagar");
+        AdapterSpinnerAddAndRemove adapterAdd = new AdapterSpinnerAddAndRemove(this, statuss);
+        for(String categoria : Categorias.getCategoriasBanco()) {
+            saveDatabaseCategorias(categoria, "Banco");
+        }
+        for (String categoria : Categorias.getCategoriasBalance()) {
+            saveDatabaseCategorias(categoria, "Balance");
+        }
+        binding.spinnerStatus.setAdapter(adapterAdd);
+    }
+
+    private void saveDatabaseCategorias(String categoria, String tipo){
         CategoriasDb categoriasDb = new CategoriasDb();
         categoriasDb.nome = categoria;
         categoriasDb.tipo = tipo;
@@ -159,6 +163,24 @@ public class AddBalanceActivity extends AppCompatActivity {
                 binding.spinnerBalance.setAdapter(categorias);
             });
         }).start();
+    }
 
+    private void saveDbBalance(BigDecimal saldo, String descricao, String status, String categoria, String banco){
+        TransacoesDbBalance transacoesDbBalance = new TransacoesDbBalance();
+        transacoesDbBalance.saldo = saldo;
+        transacoesDbBalance.descricao = descricao;
+        transacoesDbBalance.status = status;
+        transacoesDbBalance.data = data;
+        transacoesDbBalance.mes = mes;
+        transacoesDbBalance.ano = ano;
+        FinanceDatabase.databaseWriteExecutor.execute(() -> {
+            FinanceDatabase db = FinanceDatabase.getDatabase(this);
+            CategoriasDao categoriasDao = db.categoriasDao();
+            BalanceDao balanceDao = db.balanceDao();
+            transacoesDbBalance.categoriaId = categoriasDao.getId(categoria);
+            transacoesDbBalance.cartaoId = categoriasDao.getId(banco);
+            balanceDao.insert(transacoesDbBalance);
+
+        });
     }
 }

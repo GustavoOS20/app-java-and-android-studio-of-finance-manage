@@ -16,5 +16,7 @@ public interface CategoriasDao {
     void insert(CategoriasDb categoria);
     @Query("SELECT * FROM categorias")
     List<CategoriasDb> getAll();
+    @Query("SELECT id FROM categorias WHERE nome = :nomeCategoria LIMIT 1")
+    int getId(String nomeCategoria);
 
 }

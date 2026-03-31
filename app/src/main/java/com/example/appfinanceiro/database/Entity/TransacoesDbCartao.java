@@ -11,11 +11,12 @@ import java.time.LocalDate;
 @Entity(
         tableName = "transacoesCartoes",
         foreignKeys = {
-                @ForeignKey(entity = CategoriasDb.class, parentColumns = "id", childColumns = "categoria_id", onDelete = ForeignKey.SET_NULL),
-                @ForeignKey(entity = CartoesDb.class, parentColumns = "id", childColumns = "cartao_id", onDelete = ForeignKey.SET_NULL)
+                @ForeignKey(entity = CategoriasDb.class, parentColumns = "id", childColumns = "categoria_id", onDelete = ForeignKey.CASCADE),
+                @ForeignKey(entity = CategoriasDb.class, parentColumns = "id", childColumns = "cartao_id", onDelete = ForeignKey.CASCADE)
         }
 )
 public class TransacoesDbCartao {
+    public TransacoesDbCartao(){}
     @PrimaryKey(autoGenerate = true)
     public int id;
     public BigDecimal valor;

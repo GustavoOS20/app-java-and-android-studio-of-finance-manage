@@ -105,7 +105,9 @@ public class ExtratoActivity extends AddBalanceActivity {
             if (binding.chipCartao.isChecked()) {
                 return filtrarListasCredit();
             } else {
+
                 return filtrarListasAlls();
+
             }
         }).thenAccept(lista -> {
             runOnUiThread(() -> {

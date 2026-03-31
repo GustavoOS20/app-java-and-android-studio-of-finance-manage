@@ -7,6 +7,7 @@ import androidx.room.PrimaryKey;
 @Entity(tableName = "categorias",
         indices = {@Index(value = {"nome"}, unique = true)})
 public class CategoriasDb {
+    public CategoriasDb(){}
     @PrimaryKey(autoGenerate = true)
     public int id;
     public String nome;

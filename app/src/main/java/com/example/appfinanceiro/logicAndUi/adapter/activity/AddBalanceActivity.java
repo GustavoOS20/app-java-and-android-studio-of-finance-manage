@@ -23,8 +23,6 @@ import com.example.appfinanceiro.logicAndUi.adapter.data.MainData;
 import com.example.appfinanceiro.databinding.ActivityAddBalanceBinding;
 import com.example.appfinanceiro.logicAndUi.adapter.interfaces.AddBalanceInterface;
 import com.example.appfinanceiro.logicAndUi.adapter.model.Categorias;
-import com.example.appfinanceiro.logicAndUi.adapter.model.ModelBalance;
-import com.example.appfinanceiro.logicAndUi.adapter.service.ServiceBalance;
 import com.example.appfinanceiro.logicAndUi.adapter.utilitiesClass.ViewUtilities;
 import com.example.appfinanceiro.logicAndUi.adapter.verifications.VerificationsAdd;
 
@@ -166,21 +164,27 @@ public class AddBalanceActivity extends AppCompatActivity {
     }
 
     private void saveDbBalance(BigDecimal saldo, String descricao, String status, String categoria, String banco){
-        TransacoesDbBalance transacoesDbBalance = new TransacoesDbBalance();
-        transacoesDbBalance.saldo = saldo;
-        transacoesDbBalance.descricao = descricao;
-        transacoesDbBalance.status = status;
-        transacoesDbBalance.data = data;
-        transacoesDbBalance.mes = mes;
-        transacoesDbBalance.ano = ano;
+
         FinanceDatabase.databaseWriteExecutor.execute(() -> {
             FinanceDatabase db = FinanceDatabase.getDatabase(this);
             CategoriasDao categoriasDao = db.categoriasDao();
             BalanceDao balanceDao = db.balanceDao();
+            TransacoesDbBalance transacoesDbBalance = new TransacoesDbBalance();
+            transacoesDbBalance.valor = saldo;
+            transacoesDbBalance.descricao = descricao;
+            transacoesDbBalance.status = status;
+            transacoesDbBalance.data = data;
+            transacoesDbBalance.mes = mes;
+            transacoesDbBalance.ano = ano;
             transacoesDbBalance.categoriaId = categoriasDao.getId(categoria);
             transacoesDbBalance.cartaoId = categoriasDao.getId(banco);
-            balanceDao.insert(transacoesDbBalance);
-
+            System.out.println(transacoesDbBalance.categoriaId);
+            System.out.println(transacoesDbBalance.cartaoId);
+            try {
+                balanceDao.insert(transacoesDbBalance);
+            }catch (Exception e) {
+                e.printStackTrace();
+            }
         });
     }
 }

@@ -20,7 +20,6 @@ import java.util.Calendar;
 import java.util.List;
 
 public class MainData {
-    private ActivityMainBinding binding;
     private final Calendar calendar = Calendar.getInstance();
     private final AddCreditCardInterface addCreditCardInterface = new AddCreditCard();
     private final ServiceCreditCard serviceCreditCard = new ServiceCreditCard(addCreditCardInterface);
@@ -67,7 +66,7 @@ public class MainData {
         saldo -= valor;
     }
 
-    public void despesas() {
+    public void despesas(ActivityMainBinding binding) {
         dataPresente();
         FinanceDatabase db = FinanceDatabase.getDatabase(binding.getRoot().getContext());
         DespesasDao despesasDao = db.despesasDao();
@@ -76,7 +75,7 @@ public class MainData {
         this.despesas += despesasFor;
    }
 
-   public void balance(){
+   public void balance(ActivityMainBinding binding){
        dataPresente();
        FinanceDatabase db = FinanceDatabase.getDatabase(binding.getRoot().getContext());
        BalanceDao balanceDao = db.balanceDao();
@@ -85,7 +84,7 @@ public class MainData {
        receitas += balance;
     }
 
-    public void creditCard(){
+    public void creditCard(ActivityMainBinding binding){
         dataPresente();
         FinanceDatabase db = FinanceDatabase.getDatabase(binding.getRoot().getContext());
         CreditCardDao creditCardDao = db.creditDao();
@@ -104,9 +103,10 @@ public class MainData {
         BalanceDao balanceDao = db.balanceDao();
         DespesasDao despesasDao = db.despesasDao();
         CreditCardDao creditCardDao = db.creditDao();
-        List<Integer> despesasList = despesasDao.getDespesasPorData(mes, ano);
-        List<Integer> balanceList = balanceDao.getBalancePorData(mes, ano);
-        List<Integer> creditCardList = creditCardDao.getCreditPorData(mes, ano);
+            List<Integer> despesasList = despesasDao.getDespesasPorData(mes, ano);
+            List<Integer> balanceList = balanceDao.getBalancePorData(mes, ano);
+            List<Integer> creditCardList = creditCardDao.getCreditPorData(mes, ano);
+
 
         if (anoS == null || mesS == null) {
             return;

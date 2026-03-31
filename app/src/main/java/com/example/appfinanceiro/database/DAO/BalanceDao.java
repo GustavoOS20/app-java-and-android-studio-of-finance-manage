@@ -13,8 +13,8 @@ import java.util.List;
 public interface BalanceDao {
     @Insert
     void insert(TransacoesDbBalance balance);
-    @Query("SELECT data, descricao, saldo AS INTEGER, categoria_id FROM transacoesBalance ORDER BY data DESC LIMIT :limit OFFSET :offset")
+    @Query("SELECT data, descricao, CAST (valor AS INTEGER) AS valor, categorias.nome AS categoria FROM transacoesBalance INNER JOIN categorias ON categoria_id = categorias.id ORDER BY data DESC LIMIT :limit OFFSET :offset")
     List<ExtratoData> extratoBalance(int limit, int offset);
-    @Query("SELECT saldo AS INTEGER FROM transacoesBalance WHERE mes = :mes AND ano = :ano")
+    @Query("SELECT CAST (valor AS INTEGER) AS valor FROM transacoesBalance WHERE mes = :mes AND ano = :ano")
     List<Integer> getBalancePorData(int mes, int ano);
 }

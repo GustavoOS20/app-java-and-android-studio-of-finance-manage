@@ -16,6 +16,7 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.appfinanceiro.database.FinanceDatabase;
 import com.example.appfinanceiro.logicAndUi.adapter.data.MainData;
 import com.example.appfinanceiro.databinding.ActivityMainBinding;
 import com.example.appfinanceiro.logicAndUi.adapter.model.Year;
@@ -61,9 +62,11 @@ public class MainActivity extends AppCompatActivity{
     }
 
     private void defineValues(){
-        mainData.despesas();
-        mainData.balance();
-        mainData.creditCard();
+        FinanceDatabase.databaseWriteExecutor.execute(() -> {
+            mainData.despesas(binding);
+            mainData.balance(binding);
+            mainData.creditCard(binding);
+        });
         String despesas = "Despesas: " + mainData.getDespesas();
         String receitas = "Receitas: " + mainData.getReceitas();
         String saldo = "Saldo: " + mainData.getSaldo();
@@ -129,13 +132,10 @@ public class MainActivity extends AppCompatActivity{
         int mes = calendar.get(Calendar.MONTH);
         binding.mesId.setSelection(mes);
         int ano = calendar.get(Calendar.YEAR);
-
         int posicao = Year.getAnos().indexOf(ano);
-
         if (posicao != -1) {
             binding.anoId.setSelection(posicao);
         }
-
         resgatarValueSpinner(binding.mesId);
         resgatarValueSpinner(binding.anoId);
     }
@@ -144,7 +144,9 @@ public class MainActivity extends AppCompatActivity{
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                mainData.changeDate(binding, binding.mesId.getSelectedItem(), binding.anoId.getSelectedItem());
+                FinanceDatabase.databaseWriteExecutor.execute(()->{
+                    mainData.changeDate(binding, binding.mesId.getSelectedItem(), binding.anoId.getSelectedItem());
+                });
             }
 
             @Override
